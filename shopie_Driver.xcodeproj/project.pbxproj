@@ -781,6 +781,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = shopie_Driver/shopie_Driver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 595WP224KT;
 				INFOPLIST_FILE = shopie_Driver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -802,6 +803,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = shopie_Driver/shopie_Driver.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.1;
 				DEVELOPMENT_TEAM = 595WP224KT;
 				INFOPLIST_FILE = shopie_Driver/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
