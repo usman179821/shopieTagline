@@ -33,6 +33,11 @@ class ProfileDVC: UIViewController {
     
     @objc func RightNavigation(sender: UIBarButtonItem) {
         // Function body goes here
+        let SB = UIStoryboard(name: "Main", bundle: nil)
+        let VC = SB.instantiateViewController(withIdentifier: "LoginDVC") as! LoginDVC
+        let nav = UINavigationController(rootViewController: VC)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = nav
     }
     
     

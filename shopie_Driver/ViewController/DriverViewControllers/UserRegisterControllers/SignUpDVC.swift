@@ -10,6 +10,10 @@ import UIKit
 import TextFieldEffects
 import SwiftyJSON
 import Alamofire
+import FBSDKLoginKit
+import Toast_Swift
+import GoogleSignIn
+import AuthenticationServices
 
 class SignUpDVC: UIViewController {
     
@@ -27,6 +31,8 @@ class SignUpDVC: UIViewController {
     var checkBoxClicked = true
     var messageSignUp = ""
     var message = ""
+    var messageLogIn = ""
+    let appleProvider = AppleSignInClient()
     
     //MARK:- view life Cycle
     override func viewDidLoad() {
@@ -35,6 +41,11 @@ class SignUpDVC: UIViewController {
         
         signupBtn.shadow()
         navigationSetUp()
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+               
+               // Automatically sign in the user.
+               GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
     func navigationSetUp(){
@@ -43,6 +54,7 @@ class SignUpDVC: UIViewController {
     //Adding functionality top title navigation bar
     @objc func action(sender: UIBarButtonItem) {
         // Function body goes here
+        showSwiftMessageWithParams(theme: .info, title: "Signup", body: "Need some help screen not available yet")
         
     }
     
@@ -71,15 +83,88 @@ class SignUpDVC: UIViewController {
         checkBoxClicked = !checkBoxClicked
     }
     @IBAction func appleBtnTapped(_ sender: Any) {
-    }
+    
+         
+         appleProvider.handleAppleIdRequest(block: { fullName, email, token in
+             // receive data in login class.
+             
+             
+             
+         })
+    
+     
+     }
     @IBAction func faceBookBtnTabbed(_ sender: Any) {
+        fbLogin()
     }
+    
     @IBAction func googleBtnTapped(_ sender: Any) {
+       
+        print("Going to sign in through google ")
+        GIDSignIn.sharedInstance().signIn()
+    }
+    func fbLogin(){
+        
+        LoginManager().logIn(permissions: ["public_profile","email"], from: self) { (result, err) in
+            if err != nil {
+                print("Facebook login Failed",err!)
+                return
+            }else{
+                let body :[String:Any] = [
+                    "fbid": result?.token?.tokenString ?? "",
+                    "apikey":"shopie_AC4I_BD",
+                    
+                ]
+                print(body)
+              //  self.fbLoginApi(param: body)
+                //                print(result!.token?.tokenString)
+                //
+                //                print("Cancel")
+            }
+        }
+
+//             func fbLoginApi(param:[String:Any]) {
+//                Alamofire.request(socialLoginUrl, method: .post, parameters: param, encoding:
+//                    JSONEncoding.default, headers: nil).responseJSON { (response) in
+//                        print(response)
+//                        //   print(response.response?.statusCode)
+//                        if response.result.error == nil {
+//                            if response.response?.statusCode == 200 {
+//                                guard let data = response.data else {return}
+//
+//                                do{
+//
+//                                    if let jsonDic = try JSON (data: data).dictionary {
+//                                        self.messageLogIn = jsonDic["message"]?.string ?? ""
+//                                        showSwiftMessageWithParams(theme: .info, title: "Login", body: self.messageLogIn)
+//                                        guard let data = jsonDic["data"]?.dictionary else {return}
+//        //                                let userID = data["userid"]?.string ?? ""
+//        //                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdSignUp)
+//
+//
+//                                    }
+//
+//                                }catch let jsonErr{
+//                                    print(jsonErr)
+//
+//                                    showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+//                                }
+//
+//                            }else {
+//                                showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+//                            }
+//                        } else {
+//                            print(response.result.error?.localizedDescription as Any)
+//                        }
+//                }
+//            }
+        
+        
     }
     
     
     @IBAction func termsAndConditionBtnTapped(_ sender: Any) {
-        
+        showSwiftMessageWithParams(theme: .info, title: "Terms & Conditions", body: "Terms and condition screen not available yet")
     }
     @IBAction func signInBtnTapped(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "LoginDVC") as! LoginDVC
@@ -89,21 +174,26 @@ class SignUpDVC: UIViewController {
     
     @IBAction func signupBtnTapped(_ sender: Any) {
         if emailTxtField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter Email ")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please enter email ")
+            emailTxtField.becomeFirstResponder()
             
         }
         else if fullNameTxtField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your full Name")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter your full name")
+            fullNameTxtField.becomeFirstResponder()
             
         }else if phoneNumbertxtField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your Phone Number")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter your phone number")
+            phoneNumbertxtField.becomeFirstResponder()
             
         }
         else if passwordTxtField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "SignUp ", body: "Please Enter your password")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp ", body: "Please enter your password")
+            passwordTxtField.becomeFirstResponder()
             
         }else if  checkBoxClicked == true  {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Accept Terms & Condition")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please accept terms & condition")
+            
         }
         else {
             let body :[String:Any] = [
@@ -148,7 +238,7 @@ class SignUpDVC: UIViewController {
                             if self.message == "User with same email already exists" {
                                 let vc = self.storyboard?.instantiateViewController(identifier: "TransportationDVC") as! TransportationDVC
                                 self.navigationController?.pushViewController(vc, animated: true)
-                                showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Complete the Transpotation Detail")
+                                showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please complete the transpotation detail")
                                 
                                 
                             }else
@@ -166,7 +256,7 @@ class SignUpDVC: UIViewController {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please enter the right credentials")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)
@@ -222,7 +312,7 @@ extension SignUpDVC {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please enter the right credentials")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)

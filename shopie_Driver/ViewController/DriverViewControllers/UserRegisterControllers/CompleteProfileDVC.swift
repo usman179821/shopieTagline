@@ -28,6 +28,7 @@ class CompleteProfileDVC: UIViewController {
     var message = ""
     var profileImage = UIImage()
     var imagePicker = UIImagePickerController()
+    let dueDatePicker = UIDatePicker()
     private var currentImageViewForImagePicking: UIImageView? = nil
     
     override func viewDidLoad() {
@@ -35,10 +36,56 @@ class CompleteProfileDVC: UIViewController {
         continueBtn.shadow()
         setUpImageView()
         spinner.isHidden = true
+        createDatePicker()
+        createDatePicker2()
        
         // Do any additional setup after loading the view.
     }
     
+    
+    //MARK:- date picker
+    func createDatePicker() {
+        dueDatePicker.datePickerMode = .date
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let spaceButton1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let spaceButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(duedone))
+        doneButton.tintColor =  _ColorLiteralType(red: 0.8024634268, green: 0.07063802083, blue: 0.1448886847, alpha: 1)
+        toolbar.setItems([spaceButton1, spaceButton2,doneButton], animated: false)
+        issuedDateTextField.inputAccessoryView = toolbar
+        issuedDateTextField.inputView = dueDatePicker
+    }
+    @objc func duedone() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        issuedDateTextField.text = dateFormatter.string(from: dueDatePicker.date)
+        self.view.endEditing(true)
+        let datePickerr = issuedDateTextField.text
+        dueDatePicker.isUserInteractionEnabled = true
+    }
+    
+    //MARK:- date picker
+    func createDatePicker2() {
+        dueDatePicker.datePickerMode = .date
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let spaceButton1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let spaceButton2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(duedone2))
+        doneButton.tintColor =  _ColorLiteralType(red: 0.8024634268, green: 0.07063802083, blue: 0.1448886847, alpha: 1)
+        toolbar.setItems([spaceButton1, spaceButton2,doneButton], animated: false)
+        expireDateTextField.inputAccessoryView = toolbar
+        expireDateTextField.inputView = dueDatePicker
+    }
+    @objc func duedone2() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        expireDateTextField.text = dateFormatter.string(from: dueDatePicker.date)
+        self.view.endEditing(true)
+        let datePickerr = expireDateTextField.text
+        dueDatePicker.isUserInteractionEnabled = true
+    }
     
     @IBAction func continueBtnTapped(_ sender: Any) {
         if uploadDriverImg.image == nil {
@@ -115,7 +162,7 @@ class CompleteProfileDVC: UIViewController {
                             self.message = jsonDic["message"]?.string ?? ""
                             showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: self.message)
                             if self.message == "Driver profile setup"{
-                                let vc = self.storyboard?.instantiateViewController(identifier: "DeliveredDVC") as! DeliveredDVC
+                                let vc = self.storyboard?.instantiateViewController(identifier: "TransportationDVC") as! TransportationDVC
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
                             

@@ -20,6 +20,7 @@ struct orderActiveModel {
     public private(set) var bussinessName: String?
     public private(set) var totalcost: Double?
     public private(set) var customerName: String?
+    public private(set) var merchantName: String?
     
 }
 struct getProductMerchantModel {

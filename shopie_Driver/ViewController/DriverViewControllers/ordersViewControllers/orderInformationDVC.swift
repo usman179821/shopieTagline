@@ -12,6 +12,7 @@ import SwiftyJSON
 
 
 class orderInformationDVC: UIViewController {
+    @IBOutlet weak var leadingCon: NSLayoutConstraint!
     
     @IBOutlet weak var startEarningBtn: UIButton!
     
@@ -19,11 +20,74 @@ class orderInformationDVC: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "Order Information"
-        startEarningBtn.shadow()
+        leadingCon.constant = 0
+        //startEarningBtn.shadow()
 
+        swiping()
+    }
+    
+    //Mark:- Swipe Function
+    
+    func swiping (){
+        let Rightswipe = UISwipeGestureRecognizer(target: self, action: #selector(self.RespondtoGesture))
+        Rightswipe.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(Rightswipe)
+       
+    }
+    
+    @objc func RespondtoGesture(gesture: UISwipeGestureRecognizer){
+        switch gesture.direction{
+       
+        case UISwipeGestureRecognizer.Direction.right:
+            print("Swip right")
+            swipRight()
+        default:
+            break
+        }
+    }
+    
+    private func swipRight(){
+        leadingCon.constant = 300
+        //      newShadowView.alpha = 0.3
+        //   newShadowView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
     }
     
 
+    @IBAction func touchDragExit(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "orderPickupConfirmDVC") as! orderPickupConfirmDVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+          showSwiftMessageWithParams(theme: .info, title: "Order Information", body: "Order Accepted")
+            let body :[String:Any] = [
+                
+                "driverid": "5f64fbbca9136",
+                "orderid": "5f6cc867cf8c4",
+                "apikey":"shopie_AC4I_BD",
+                
+            ]
+            
+            acceptOrder(param: body)
+        leadingCon.constant = 300
+    }
+    @IBAction func primaryAction(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(identifier: "orderPickupConfirmDVC") as! orderPickupConfirmDVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+          showSwiftMessageWithParams(theme: .info, title: "Order Information", body: "Order Accepted")
+            let body :[String:Any] = [
+                
+                "driverid": "5f64fbbca9136",
+                "orderid": "5f6cc867cf8c4",
+                "apikey":"shopie_AC4I_BD",
+                
+            ]
+            
+            acceptOrder(param: body)
+        leadingCon.constant = 300
+    }
     @IBAction func startEanringBtnTapped(_ sender: Any) {
         let vc = storyboard?.instantiateViewController(identifier: "orderPickupConfirmDVC") as! orderPickupConfirmDVC
         
@@ -38,6 +102,7 @@ class orderInformationDVC: UIViewController {
             ]
             
             acceptOrder(param: body)
+        leadingCon.constant = 300
     }
 
         //MARK:- Private Functions

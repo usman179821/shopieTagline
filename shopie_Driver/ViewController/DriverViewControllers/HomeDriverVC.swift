@@ -55,21 +55,14 @@ class HomeDriverVC: UIViewController {
 //        acceptGigsTableView.isHidden = false
 //     }
     func navigationRightIcon(){
-        let menuButton = UIBarButtonItem(image: UIImage(named: "rightTopNav")!.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(RightNavigation(sender:)))
+        let menuButton = UIBarButtonItem(image: UIImage(named: "notificationM")!.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(RightNavigation(sender:)))
         self.navigationItem.rightBarButtonItem  = menuButton
     }
     
     @objc func RightNavigation(sender: UIBarButtonItem) {
-        // Function body goes here
-//        acceptGigsTableView.isHidden = true
-//        self.waitingRequestView139.constant = 139
-       // acceptGigsTableView.isHidden = true
-     //   setRootViewController(storyBoardId: "Marchant", viewControllerId: "TabBarMarConroller")
-        let SB = UIStoryboard(name: "Marchant", bundle: nil)
-        let VC = SB.instantiateViewController(withIdentifier: "CompleteProfileMarVC") as! CompleteProfileMarVC
-        let navVC = UINavigationController(rootViewController: VC)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.window?.rootViewController = navVC
+      
+        showSwiftMessageWithParams(theme: .info, title: "Notification", body: "notification not implement yet from backend")
+        
        
     }
     

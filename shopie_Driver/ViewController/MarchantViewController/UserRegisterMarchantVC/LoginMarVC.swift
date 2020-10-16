@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import SwiftyJSON
 import Toast_Swift
 import GoogleSignIn
+import AuthenticationServices
 
 class LoginMarVC: UIViewController {
     
@@ -27,6 +28,7 @@ class LoginMarVC: UIViewController {
     //MARK:- Properties and Variables
     var messageLogIn = ""
     var iconClicked = true
+    let appleProvider = AppleSignInClient()
     
     //MARK:- view life cycle
     override func viewDidLoad() {
@@ -41,24 +43,39 @@ class LoginMarVC: UIViewController {
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
+    @IBAction func switchBtnTapped(_ sender: UISwitch) {
+        if (sender.isOn == true) {
+                   UserDefaults.standard.set(true, forKey: "rememberMeMerchant")
+
+
+               } else {
+
+
+               }
+    }
     func navigationSetup() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Forgot your credentials?", style: .done, target: self, action: #selector(action(sender:)))
     }
     //Adding functionality top title navigation bar
     @objc func action(sender: UIBarButtonItem) {
-       let SB = UIStoryboard(name: "Marchant", bundle: nil)
-       let VC = SB.instantiateViewController(withIdentifier: "TabBarMarConroller") as! TabBarMarConroller
        
-       let appDelegate = UIApplication.shared.delegate as! AppDelegate
-       appDelegate.window?.rootViewController = VC
-
-        
+        showSwiftMessageWithParams(theme: .info, title: "Login", body: "Forgot password screen not available")
     }
     
     //MARK:- Actions
     @IBAction func appleBtnTapped(_ sender: Any) {
         
-    }
+             
+             appleProvider.handleAppleIdRequest(block: { fullName, email, token in
+                 // receive data in login class.
+                 
+                 
+                 
+             })
+        
+         
+         }
+    
     
     @IBAction func FbBtnTapped(_ sender: Any) {
         
@@ -96,10 +113,10 @@ class LoginMarVC: UIViewController {
     @IBAction func loginBtnTapped(_ sender: Any) {
         
         if emailTextField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please Enter The Email Field")
+            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please enter the email field")
             
         }else if passwordTextField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please Enter the password fields")
+            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please enter the password field")
             
         }else {
             
@@ -130,11 +147,10 @@ class LoginMarVC: UIViewController {
                             if let jsonDic = try JSON (data: data).dictionary {
                                 self.messageLogIn = jsonDic["message"]?.string ?? ""
                                 showSwiftMessageWithParams(theme: .info, title: "Login", body: self.messageLogIn)
-                              //  guard let data = jsonDic["data"]?.dictionary else {return}
-                                //                                let userID = data["userid"]?.string ?? ""
-                                //                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdSignUp)
+//                                guard let data = jsonDic["data"]?.dictionary else {return}
+//                                let userID = data["userid"]?.string ?? ""
+//                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIDMarchant)
                                 if self.messageLogIn == "user logged in" {
-                                    
                                     let SB = UIStoryboard(name: "Marchant", bundle: nil)
                                     let VC = SB.instantiateViewController(withIdentifier: "TabBarMarConroller") as! TabBarMarConroller
                                     
@@ -149,7 +165,6 @@ class LoginMarVC: UIViewController {
                             
                         }catch let jsonErr{
                             print(jsonErr)
-                            
                             showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
                         }
                         

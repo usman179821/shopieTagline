@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class PhoneVerifyMarVC: UIViewController {
+    @IBOutlet weak var numberLbl: UILabel!
     @IBOutlet weak var phoneLbl: UILabel!
     @IBOutlet weak var verifyCodeBtn: UIButton!
     @IBOutlet weak var oneTextField: UITextField!
@@ -19,6 +20,9 @@ class PhoneVerifyMarVC: UIViewController {
     @IBOutlet weak var fourTextField: UITextField!
     
     var message = ""
+    var seconds = 60
+    var timer = Timer()
+    var isTimerRunning = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +36,21 @@ class PhoneVerifyMarVC: UIViewController {
         twoTextField.addTarget(self, action: #selector(textFieldDidChange(textfield:)), for: UIControl.Event.editingChanged)
         threeTextField.addTarget(self, action: #selector(textFieldDidChange(textfield:)), for: UIControl.Event.editingChanged)
         fourTextField.addTarget(self, action: #selector(textFieldDidChange(textfield:)), for: UIControl.Event.editingChanged)
+        
+         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(PhoneVerificationDVC.update), userInfo: nil, repeats: true)
     }
-    
+    @objc func update() {
+        seconds -= 1
+            numberLbl.text = ": 00:" + "\(seconds)"  + "s"
+        if seconds == 0 {
+            seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
+                numberLbl.text = "\(seconds)"
+        }
+    }
+    @IBAction func resentBtnTapped(_ sender: Any) {
+        seconds = 60    //Here we manually enter the restarting point for the seconds, but it would be wiser to make this a variable or constant.
+             numberLbl.text = "\(seconds)"
+    }
     @objc func textFieldDidChange(textfield: UITextField){
         let text = textfield.text
         if text?.utf16.count == 1 {
@@ -56,7 +73,24 @@ class PhoneVerifyMarVC: UIViewController {
     }
     
     @IBAction func verifyBtnTapped(_ sender: Any) {
-        verifyByNumber()
+        
+        if oneTextField.text!.isEmpty {
+            showSwiftMessageWithParams(theme: .info, title: "Phone Verification", body: "Please fill all fields")
+            oneTextField.becomeFirstResponder()
+            
+        }else if twoTextField.text!.isEmpty{
+             showSwiftMessageWithParams(theme: .info, title: "Phone Verification", body: "Please fill all fields")
+            twoTextField.becomeFirstResponder()
+        }else if threeTextField.text!.isEmpty {
+             showSwiftMessageWithParams(theme: .info, title: "Phone Verification", body: "Please fill all fields")
+            threeTextField.becomeFirstResponder()
+        }else if fourTextField.text!.isEmpty{
+             showSwiftMessageWithParams(theme: .info, title: "Phone Verification", body: "Please fill all fields")
+            fourTextField.becomeFirstResponder()
+        }else {
+            verifyByNumber()
+        }
+        
     }
 }
 
@@ -93,10 +127,14 @@ extension PhoneVerifyMarVC {
                             showSwiftMessageWithParams(theme: .info, title: "Phone Verify", body: self.message)
                             
                             
+                            if self.message == "Incorrect code" {
+                                showSwiftMessageWithParams(theme: .info, title: "Phone Verification", body: "please enter the valid code")
+                            }else{
                             let checkStoryBoard = UIStoryboard (name: "Marchant", bundle: nil)
                             let partner = checkStoryBoard.instantiateViewController(withIdentifier: "CompleteProfileMarVC") as! CompleteProfileMarVC
                             self.navigationController?.pushViewController(partner, animated: true)
                             self.setPhoneVerified()
+                            }
                             
                         }
                         

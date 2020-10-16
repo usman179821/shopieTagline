@@ -51,6 +51,7 @@
 		FA2EC574252260280024DFD7 /* hoorayDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2EC573252260280024DFD7 /* hoorayDVC.swift */; };
 		FA3469322521C2570043C59F /* bankInfoDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3469312521C2570043C59F /* bankInfoDVC.swift */; };
 		FA3469342521CA590043C59F /* notificationsDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3469332521CA590043C59F /* notificationsDVC.swift */; };
+		FA5008972537231B000AF3D5 /* AppleSignInClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5008962537231B000AF3D5 /* AppleSignInClient.swift */; };
 		FA57FB032510914A008EAF00 /* font-awesome in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAF925109146008EAF00 /* font-awesome */; };
 		FA57FB042510914A008EAF00 /* Inter_Semi_Bold_Font_Family_(Fontmirror) in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAFA25109147008EAF00 /* Inter_Semi_Bold_Font_Family_(Fontmirror) */; };
 		FA57FB052510914A008EAF00 /* SfproText  in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAFB25109148008EAF00 /* SfproText  */; };
@@ -130,6 +131,7 @@
 		FA2EC573252260280024DFD7 /* hoorayDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hoorayDVC.swift; sourceTree = "<group>"; };
 		FA3469312521C2570043C59F /* bankInfoDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bankInfoDVC.swift; sourceTree = "<group>"; };
 		FA3469332521CA590043C59F /* notificationsDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationsDVC.swift; sourceTree = "<group>"; };
+		FA5008962537231B000AF3D5 /* AppleSignInClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppleSignInClient.swift; path = "../../../../../../Downloads/signIn-withApple-master/AppleSignIn/AppleSignInClient.swift"; sourceTree = "<group>"; };
 		FA57FAF825109146008EAF00 /* FontsFree-Net-SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontsFree-Net-SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		FA57FAF925109146008EAF00 /* font-awesome */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "font-awesome"; sourceTree = "<group>"; };
 		FA57FAFA25109147008EAF00 /* Inter_Semi_Bold_Font_Family_(Fontmirror) */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Inter_Semi_Bold_Font_Family_(Fontmirror)"; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 		FA18A423252F2E42008130AB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FA5008962537231B000AF3D5 /* AppleSignInClient.swift */,
 				FA18A428252F2EC0008130AB /* orderModel.swift */,
 			);
 			path = Model;
@@ -598,6 +601,7 @@
 				FA065E01252B373D00D569F3 /* acceptDeliveryDVC.swift in Sources */,
 				FA89A3B9251894F80089AB9B /* SelectedAssetsCollectionViewCell.swift in Sources */,
 				FA9CF9DD2517662000C57904 /* HomeDriverVC.swift in Sources */,
+				FA5008972537231B000AF3D5 /* AppleSignInClient.swift in Sources */,
 				FA022FA72517971000A4037D /* AddProductVC.swift in Sources */,
 				FA022FAB251797B900A4037D /* TabBarMarConroller.swift in Sources */,
 				FA022FA92517974300A4037D /* HomeMarVC.swift in Sources */,
@@ -783,6 +787,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spunky.shopie-Driver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -803,6 +808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spunky.shopie-Driver";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

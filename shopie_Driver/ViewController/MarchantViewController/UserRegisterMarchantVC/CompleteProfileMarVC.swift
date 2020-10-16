@@ -55,8 +55,10 @@ class CompleteProfileMarVC: UIViewController {
             showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please Enter State")
             
         } else if aboutBusinessTextView.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please Enter about business")
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please tell about your business")
             
+        }else if uploadProfileImage.image == nil {
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please upload bussiness logo")
         }
         else {
            

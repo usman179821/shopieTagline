@@ -14,19 +14,11 @@ class acceptDeliveryDVC: UIViewController {
     
     @IBOutlet weak var acceptGigsTableView: UITableView!
     
-    
-    //MARK:- properties and variables
-    var electronisImg : [UIImage] = [UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!,UIImage(named: "electronicsImg")!]
-    var electronicsTitleNameData = ["Electronics Express","Electronics Express","Electronics Express","Electronics Express","Electronics Express","Electronics Express","Electronics Express"]
-    var nameData = ["Merchant","Merchant","Merchant","Merchant","Merchant","Merchant","Merchant"]
-    var milawayImg : [UIImage] = [UIImage(named: "mileAway")!,UIImage(named: "mileAway")!,UIImage(named: "mileAway")!,UIImage(named: "mileAway")!,UIImage(named: "mileAway")!,UIImage(named: "mileAway")!,UIImage(named: "mileAway")!]
-    var milawayData = ["4.9 miles away","4.9 miles away","4.9 miles away","4.9 miles away","4.9 miles away","4.9 miles away","4.9 miles away"]
-    var pickupImage : [UIImage] = [UIImage(named: "pickUp")!,UIImage(named: "pickUp")!,UIImage(named: "pickUp")!,UIImage(named: "pickUp")!,UIImage(named: "pickUp")!,UIImage(named: "pickUp")!,UIImage(named: "pickUp")!]
-    var pickUpData =  ["pick Up from 9 West 46th Street","pick Up from 9 West 46th Street","pick Up from 9 West 46th Street","pick Up from 9 West 46th Street","pick Up from 9 West 46th Street","pick Up from 9 West 46th Street","pick Up from 9 West 46th Street"]
+    lazy var availableDeliveryArray = [orderActiveModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        availableDeliverysetup()
         // Do any additional setup after loading the view.
     }
     
@@ -42,7 +34,7 @@ class acceptDeliveryDVC: UIViewController {
         //let userID = UserDefaults.standard.array(forKey: SessionManager.Shared.userIdDriver)
         let body :[String:Any] = [
             // "userid": userID ,
-            "userid": "5f69c3ecb26f0",
+            "userid": "5f6783aec74f2",
             "lat": "latitude",
             "lang": "longitude",
             "apikey": "shopie_AC4I_BD"
@@ -81,9 +73,11 @@ class acceptDeliveryDVC: UIViewController {
                                     for  item2 in productArray {
                                         guard let ProductDic = item2.dictionary else {return}
                                         let productid = ProductDic["productid"]?.string ?? ""
+                                        let productName = ProductDic["productname"]?.string ?? ""
                                         ///....
                                         let SalesTax = dataDic["SalesTax"]?.double ?? 0.00
                                         guard let merchantDic = dataDic["merchant"]?.dictionary else {return}
+                                        let merchantName = merchantDic["name"]?.string ?? ""
                                         
                                         //.....
                                         guard let businessDic = merchantDic["business"]?.dictionary else {return}
@@ -102,8 +96,8 @@ class acceptDeliveryDVC: UIViewController {
                                         
                                         //..............
                                         
-                                        let object1 = orderActiveModel.init(orderPlacedDate: orderplaceddate, bussinessName: businessname)
-                                        //self.getActiveOrderArray.append(object1)
+                                        let object1 = orderActiveModel.init(orderID: nil, customerID: nil, merchantID: nil, driverID: nil, productID: nil, productName: productName, ProductQuantity: nil, orderPlacedDate: nil, bussinessName: businessname, totalcost: nil, customerName: nil,merchantName: merchantName)
+                                        self.availableDeliveryArray.append(object1)
                                         
                                         
                                         
@@ -137,18 +131,18 @@ class acceptDeliveryDVC: UIViewController {
 
 extension acceptDeliveryDVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameData.count
+        return availableDeliveryArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! AvailableGigsCell
-        cell.electronicsImg.image = electronisImg[indexPath.row]
-        cell.electronicsTitleNameLbl.text = electronicsTitleNameData[indexPath.row]
-        cell.nameLbl.text = nameData[indexPath.row]
-        cell.milesAwayImg.image = milawayImg[indexPath.row]
-        cell.mileawayNameLbl.text = milawayData[indexPath.row]
-        cell.pickUpLbl.image = pickupImage[indexPath.row]
-        cell.pickNameLbl.text = pickUpData[indexPath.row]
+       // cell.electronicsImg.image = electronisImg[indexPath.row]
+        cell.electronicsTitleNameLbl.text = availableDeliveryArray[indexPath.row].productName
+        cell.nameLbl.text = availableDeliveryArray[indexPath.row].merchantName
+//        cell.milesAwayImg.image = milawayImg[indexPath.row]
+//        cell.mileawayNameLbl.text = milawayData[indexPath.row]
+//        cell.pickUpLbl.image = pickupImage[indexPath.row]
+//        cell.pickNameLbl.text = pickUpData[indexPath.row]
         cell.acceptDeliveryBtn.tag = indexPath.row
         cell.acceptDeliveryBtn.addTarget(self, action: #selector(acceptDeliveryBtnTapped(sender:)), for: .touchUpInside)
         

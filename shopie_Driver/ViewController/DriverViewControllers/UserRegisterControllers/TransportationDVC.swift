@@ -108,8 +108,8 @@ class TransportationDVC: UIViewController {
                             showSwiftMessageWithParams(theme: .info, title: "Transport Detail", body: self.message)
 //                            let checkStoryBoard = UIStoryboard (name: "Main", bundle: nil)
                             if self.message == "User transport details added successfully" {
-                                let partner = self.storyboard?.instantiateViewController(withIdentifier: "CompleteProfileDVC") as! CompleteProfileDVC
-                                self.navigationController?.pushViewController(partner, animated: true)
+                                let partner = self.storyboard?.instantiateViewController(withIdentifier: "DeliveredDVC") as! DeliveredDVC
+                        self.navigationController?.pushViewController(partner, animated: true)
                             }else {
                                 
                             }

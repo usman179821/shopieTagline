@@ -22,10 +22,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         // Override point for customization after application launch.
         //Keyboared setting
         
-               IQKeyboardManager.shared.enable = true
-               IQKeyboardManager.shared.enableDebugging = true
-               IQKeyboardManager.shared.enableAutoToolbar = false
-               IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        //keyboared setting
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableDebugging = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        //Navigation setting
+        //Mark:- for navigation topBar
+        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        UINavigationBar.appearance().isTranslucent = false
+        
+        //Google sign in setup
+        // Initialize sign-in Google
+               GIDSignIn.sharedInstance().clientID = "388374304159-6jhreavke0ccsi0319umvdg62prhsr9u.apps.googleusercontent.com"
+               GIDSignIn.sharedInstance().delegate = self
+        
+        
+        
 
         if  UserDefaults.standard.string(forKey: SessionManager.Shared.isMerchant) == "Merchant" {
 
@@ -37,47 +53,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         }else {
             setRootViewController(storyBoardId: "Main", viewControllerId: "UniversalScreenVC")
         }
-        
+
         let userIDMerchant = UserDefaults.standard.string(forKey: SessionManager.Shared.userIDMarchant) ?? ""
          let userIDDriver = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver) ?? ""
-        
+
         if userIDDriver != "" {
-            // Show Home Screen
-            let SB = UIStoryboard(name: "Main", bundle: nil)
-            let VC = SB.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
-            self.window = UIWindow(frame: UIScreen.main.bounds)
-            self.window?.rootViewController = VC
-            self.window?.makeKeyAndVisible()
             
+           if UserDefaults.standard.bool(forKey: "rememberMe"){
+                let SB = UIStoryboard(name: "Main", bundle: nil)
+                let VC = SB.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window?.rootViewController = VC
+                self.window?.makeKeyAndVisible()
+            }else {
+                let SB = UIStoryboard(name: "Main", bundle: nil)
+                let VC = SB.instantiateViewController(withIdentifier: "LoginDVC") as! LoginDVC
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window?.rootViewController = VC
+                self.window?.makeKeyAndVisible()
+            }
+            // Show Home Screen
+            
+
         }else if userIDMerchant != "" {
+            if UserDefaults.standard.bool(forKey: "rememberMeMerchant") {
             let SB = UIStoryboard(name: "Marchant", bundle: nil)
             let VC = SB.instantiateViewController(withIdentifier: "TabBarMarConroller") as! TabBarMarConroller
             self.window = UIWindow(frame: UIScreen.main.bounds)
             self.window?.rootViewController = VC
-            self.window?.makeKeyAndVisible()
+                self.window?.makeKeyAndVisible()
+                
+            }else {
+                let SB = UIStoryboard(name: "Marchant", bundle: nil)
+                let VC = SB.instantiateViewController(withIdentifier: "LoginMarVC") as! LoginMarVC
+                self.window = UIWindow(frame: UIScreen.main.bounds)
+                self.window?.rootViewController = VC
+                    self.window?.makeKeyAndVisible()
+            }
         }
-        
-        // Initialize sign-in Google
-        GIDSignIn.sharedInstance().clientID = "388374304159-6jhreavke0ccsi0319umvdg62prhsr9u.apps.googleusercontent.com"
-        GIDSignIn.sharedInstance().delegate = self
-        
-        //MARK:- keyboared setting
-        IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableDebugging = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
-        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        //Mark:- for navigation topBar
-        UINavigationBar.appearance().barTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        UINavigationBar.appearance().isTranslucent = false
+
+       
+       
         
         
         return true
         
     }
     
-    func application(
+   func application(
         _ app: UIApplication,
         open url: URL,
         options: [UIApplication.OpenURLOptionsKey : Any] = [:]

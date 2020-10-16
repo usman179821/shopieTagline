@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import SwiftyJSON
 import Toast_Swift
 import GoogleSignIn
+import AuthenticationServices
 
 
 class LoginDVC: UIViewController {
@@ -25,9 +26,11 @@ class LoginDVC: UIViewController {
     @IBOutlet weak var switchBtn: UISwitch!
     @IBOutlet weak var hideOrUnhidePasswordBtn: UIButton!
     
+    
     //MARK:- Properties and Variables
     var messageLogIn = ""
     var iconClicked = true
+    let appleProvider = AppleSignInClient()
     
     //MARK:- view life cycle
     override func viewDidLoad() {
@@ -36,25 +39,47 @@ class LoginDVC: UIViewController {
         loginBtn.shadow()
         //MARK:- top navigation
         navigationSetup()
-        GIDSignIn.sharedInstance()?.presentingViewController = self
         
-        // Automatically sign in the user.
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+    GIDSignIn.sharedInstance()?.presentingViewController = self
+    
+    // Automatically sign in the user.
+    GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
+    @IBAction func switchBtnTapped(_ sender: UISwitch) {
+       // let useridDriver = UserDefaults.standard.array(forKey: SessionManager.Shared.userIdDriver)
+        if (sender.isOn == true) {
+            UserDefaults.standard.set(true, forKey: "rememberMe")
+
+
+        } else {
+
+
+        }
+    }
     func navigationSetup() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Forgot your credentials?", style: .done, target: self, action: #selector(action(sender:)))
     }
     //Adding functionality top title navigation bar
     @objc func action(sender: UIBarButtonItem) {
         
+        showSwiftMessageWithParams(theme: .info, title: "Login", body: "Screen not available")
     }
     
     //MARK:- Actions
     
     @IBAction func appleBtnTapped(_ sender: Any) {
-        
-    }
+    
+         
+         appleProvider.handleAppleIdRequest(block: { fullName, email, token in
+             // receive data in login class.
+             
+             
+             
+         })
+    
+     
+     }
     
     @IBAction func FbBtnTapped(_ sender: Any) {
         
@@ -63,7 +88,7 @@ class LoginDVC: UIViewController {
     }
     @IBAction func googleBtnTapped(_ sender: Any) {
         print("Going to sign in through google ")
-        GIDSignIn.sharedInstance().signIn()
+              GIDSignIn.sharedInstance().signIn()
     }
     
     
@@ -92,10 +117,10 @@ class LoginDVC: UIViewController {
     @IBAction func loginBtnTapped(_ sender: Any) {
         
         if emailTextField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please Enter The Email Field")
+            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please enter the email Field")
             
         }else if passwordTextField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please Enter the password fields")
+            showSwiftMessageWithParams(theme: .info, title: "Login", body: "Please enter the password field")
             
         }else {
             
@@ -127,15 +152,13 @@ class LoginDVC: UIViewController {
                                 self.messageLogIn = jsonDic["message"]?.string ?? ""
                                 showSwiftMessageWithParams(theme: .info, title: "Login", body: self.messageLogIn)
 //                                guard let data = jsonDic["data"]?.dictionary else {return}
+//                                let userID = data["userid"]?.string ?? ""
+//                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdDriver)
                                 let SB = UIStoryboard(name: "Main", bundle: nil)
                                 let VC = SB.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
                                 
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.window?.rootViewController = VC
-                                
-//                                let userID = data["userid"]?.string ?? ""
-//                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdSignUp)
-                                
                                 
                             }
                             
@@ -146,7 +169,7 @@ class LoginDVC: UIViewController {
                         }
                         
                     }else {
-                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please enter the right credentials")
                     }
                 } else {
                     print(response.result.error?.localizedDescription as Any)
@@ -197,7 +220,9 @@ extension LoginDVC {
                             if let jsonDic = try JSON (data: data).dictionary {
                                 self.messageLogIn = jsonDic["message"]?.string ?? ""
                                 showSwiftMessageWithParams(theme: .info, title: "Login", body: self.messageLogIn)
-                                guard let data = jsonDic["data"]?.dictionary else {return}
+                              
+                                
+                                //guard let data = jsonDic["data"]?.dictionary else {return}
 //                                let userID = data["userid"]?.string ?? ""
 //                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdSignUp)
                                 
@@ -211,7 +236,7 @@ extension LoginDVC {
                         }
                         
                     }else {
-                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please enter the right credentials")
                     }
                 } else {
                     print(response.result.error?.localizedDescription as Any)

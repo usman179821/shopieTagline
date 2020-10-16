@@ -23,6 +23,7 @@ class activeOrderMVC: UIViewController {
     
     lazy var getActiveOrderArray = [orderActiveModel]()
     lazy var completeOrderArray = [orderActiveModel]()
+    var message = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +57,65 @@ class activeOrderMVC: UIViewController {
     }
     
     @objc func cancelOrderBtnTapped(_sender: UIButton) {
-        print("Cancel Order")
+        
+            let body :[String:Any] = [
+              
+                "userid": "5f649cbf84cfc",
+                "orderid": getActiveOrderArray[0].orderID ?? 00,
+                "role": "MERCHANT",
+                "apikey": "shopie_AC4I_BD"
+
+                
+            ]
+            
+            cancelOrder(param: body)
+            
         
     }
+    
+        //MARK:- Private Functions
+        private func cancelOrder(param:[String:Any]) {
+            Alamofire.request(cancelOrderMerchantUrl, method: .post, parameters: param, encoding:
+                JSONEncoding.default, headers: nil).responseJSON { (response) in
+                    print(response)
+                    //   print(response.response?.statusCode)
+                    if response.result.error == nil {
+                        if response.response?.statusCode == 200 {
+                            guard let data = response.data else {return}
+                            
+                            do{
+                                
+                                if let jsonDic = try JSON (data: data).dictionary {
+                                    self.message = jsonDic["message"]?.string ?? ""
+                                    showSwiftMessageWithParams(theme: .info, title: "Order Information", body: self.message)
+    //                                guard let data = jsonDic["data"]?.dictionary else {return}
+                                
+                                        
+                                        
+        
+                                    
+                                    
+    //                                let userID = data["userid"]?.string ?? ""
+    //                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdSignUp)
+                                    
+                                    
+                                }
+                                
+                            }catch let jsonErr{
+                                print(jsonErr)
+                                
+                                showSwiftMessageWithParams(theme: .info, title: "Order Information", body: jsonErr.localizedDescription)
+                            }
+                            
+                        }else {
+                            showSwiftMessageWithParams(theme: .error, title: "Order Information", body: "something not working")
+                        }
+                    } else {
+                        print(response.result.error?.localizedDescription as Any)
+                    }
+            }
+        }
+    
     @objc func viewOrderDetailBtnTapped(_sender: UIButton){
         
         let vc = storyboard?.instantiateViewController(identifier: "acceptOrderMVC") as! acceptOrderMVC

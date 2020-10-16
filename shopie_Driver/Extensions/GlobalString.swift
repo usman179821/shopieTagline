@@ -40,6 +40,7 @@ let getProductMerchantUrl = "https://gotyour6app.online/shopie/product/getproduc
 let acceptOrderMerchantUrl = "https://gotyour6app.online/shopie/order/acceptorder.php"
 let rejectOrderMerchantUrl = "https://gotyour6app.online/shopie/order/rejectorder.php"
 let prepareOrderMerchantUrl = "https://gotyour6app.online/shopie/order/merchantpreparedorder.php"
+let cancelOrderMerchantUrl = "https://gotyour6app.online/shopie/order/cancelorder.php"
 
 
 

@@ -7,9 +7,14 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import TextFieldEffects
+import Alamofire
+import FBSDKLoginKit
+import SwiftyJSON
+import Toast_Swift
+import GoogleSignIn
+import AuthenticationServices
+
 
 
 class SignupMarVC: UIViewController {
@@ -28,6 +33,7 @@ class SignupMarVC: UIViewController {
     var checkBoxClicked = true
     var messageSignUp = ""
     var message = ""
+    let appleProvider = AppleSignInClient()
     
     //MARK:- view life Cycle
     override func viewDidLoad() {
@@ -36,6 +42,10 @@ class SignupMarVC: UIViewController {
         
         signupBtn.shadow()
         navigationSetUp()
+    GIDSignIn.sharedInstance()?.presentingViewController = self
+        
+        // Automatically sign in the user.
+    GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
     func navigationSetUp(){
@@ -44,6 +54,7 @@ class SignupMarVC: UIViewController {
     //Adding functionality top title navigation bar
     @objc func action(sender: UIBarButtonItem) {
         // Function body goes here
+          showSwiftMessageWithParams(theme: .info, title: "Need some help", body: "Need some help screen not available")
         
     }
     
@@ -72,13 +83,50 @@ class SignupMarVC: UIViewController {
         checkBoxClicked = !checkBoxClicked
     }
     @IBAction func appleBtnTapped(_ sender: Any) {
-    }
+    
+         
+         appleProvider.handleAppleIdRequest(block: { fullName, email, token in
+             // receive data in login class.
+             
+             
+             
+         })
+    
+     
+     }
     @IBAction func faceBookBtnTabbed(_ sender: Any) {
+        fbLogin()
     }
     @IBAction func googleBtnTapped(_ sender: Any) {
+        print("Going to sign in through google ")
+               GIDSignIn.sharedInstance().signIn()
     }
     
     @IBAction func termsAndConditionBtnTapped(_ sender: Any) {
+        
+    }
+    
+    
+    func fbLogin(){
+        
+        LoginManager().logIn(permissions: ["public_profile","email"], from: self) { (result, err) in
+            if err != nil {
+                print("Facebook login Failed",err!)
+                return
+            }else{
+                let body :[String:Any] = [
+                    "fbid": result?.token?.tokenString ?? "",
+                    "apikey":"shopie_AC4I_BD",
+                    
+                ]
+                print(body)
+              //  self.fbLoginApi(param: body)
+                //                print(result!.token?.tokenString)
+                //
+                //                print("Cancel")
+            }
+        }
+        
         
     }
     @IBAction func signInBtnTapped(_ sender: Any) {
@@ -90,18 +138,19 @@ class SignupMarVC: UIViewController {
     @IBAction func signupBtnTapped(_ sender: Any) {
         if emailTxtField.text!.isEmpty{
             showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter Email ")
-            
+            emailTxtField.becomeFirstResponder()
         }
         else if fullNameTxtField.text!.isEmpty {
             showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your full Name")
-            
+            fullNameTxtField.becomeFirstResponder()
         }else if phoneNumbertxtField.text!.isEmpty {
             showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your Phone Number")
+            phoneNumbertxtField.becomeFirstResponder()
             
         }
         else if passwordTxtField.text!.isEmpty{
             showSwiftMessageWithParams(theme: .info, title: "SignUp ", body: "Please Enter your password")
-            
+            passwordTxtField.becomeFirstResponder()
         }else if  checkBoxClicked == true  {
             showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Accept Terms & Condition")
         }

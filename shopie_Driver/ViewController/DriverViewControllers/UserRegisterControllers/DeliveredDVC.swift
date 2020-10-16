@@ -38,7 +38,7 @@ class DeliveredDVC: UIViewController {
                let navVC = UINavigationController(rootViewController: VC)
                let appDelegate = UIApplication.shared.delegate as! AppDelegate
                appDelegate.window?.rootViewController = navVC
-        showSwiftMessageWithParams(theme: .success, title: "ask Questin", body: "succefully SignUp")
+        showSwiftMessageWithParams(theme: .success, title: "Ask Questin", body: "Succefully SignUp")
     }
     
     
