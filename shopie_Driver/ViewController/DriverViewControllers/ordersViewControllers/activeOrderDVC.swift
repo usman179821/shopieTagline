@@ -40,24 +40,25 @@ class activeOrderDVC: UIViewController {
     
     
     func activeOrder(){
-        //let userID = UserDefaults.standard.array(forKey: SessionManager.Shared.userIdDriver)
+        let userID = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver)
         let body :[String:Any] = [
            // "userid": userID ,
-            "userid": "5f69c3ecb26f0",
+            "userid": userID ?? "",
            
             "apikey":"shopie_AC4I_BD",
             
         ]
         
+        print(body)
         activeOrderAPI(param: body)
 
     }
     
     func completeOrcancelorder(){
-        //let userID = UserDefaults.standard.array(forKey: SessionManager.Shared.userIdDriver)
+        let userID = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver)
         let body :[String:Any] = [
            // "userid": userID ,
-            "userid": "5f69c3ecb26f0",
+            "userid": userID ?? "",
            
             "apikey":"shopie_AC4I_BD",
             
@@ -131,11 +132,11 @@ class activeOrderDVC: UIViewController {
                                 }catch let jsonErr{
                                     print(jsonErr)
                                     
-                                    showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+                                    showSwiftMessageWithParams(theme: .info, title: "Active Orders", body: jsonErr.localizedDescription)
                                 }
                                 
                             }else {
-                                showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                                showSwiftMessageWithParams(theme: .error, title: "Active Orders", body: "Something is not working")
                             }
                         } else {
                             print(response.result.error?.localizedDescription as Any)
@@ -189,12 +190,14 @@ class activeOrderDVC: UIViewController {
                                             //..............
                                             
                                             let object = orderActiveModel.init(orderID: orderID, customerID: customerid, merchantID: merchantid, driverID: driverid, productID: productid, productName: productName, ProductQuantity: productctQuantity, orderPlacedDate: orderplaceddate, bussinessName: businessname,totalcost: totalcost)
+                                            print(object)
                                             self.getActiveOrderArray.append(object)
-                                            let SB = UIStoryboard(name: "Main", bundle: nil)
-                                            let vc = SB.instantiateViewController(identifier: "startDeliveryDVC") as!  startDeliveryDVC
-                                            vc.passigData = self.getActiveOrderArray
-                                            self.navigationController?.pushViewController(vc, animated: true)
-                                            
+//                                            let SB = UIStoryboard(name: "Main", bundle: nil)
+//                                            let vc = SB.instantiateViewController(identifier: "startDeliveryDVC") as!  startDeliveryDVC
+                                           // vc.passigData = self.getActiveOrderArray
+                                            //self.navigationController?.pushViewController(vc, animated: true)
+                                           
+                                            }
                                             
                                             
                                         }
@@ -203,18 +206,19 @@ class activeOrderDVC: UIViewController {
                                         //                                        self.getActiveOrderArray.append(object)
                                         
                                     }
-                                    
+                                if self.getActiveOrderArray.count == 0 {
+                                    showSwiftMessageWithParams(theme: .info, title: "Order Information", body: "Order List Not Obtained")
                                     self.orderTableView.reloadData()
                                 }
                                 
                             }catch let jsonErr{
                                 print(jsonErr)
                                 
-                                showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+                                showSwiftMessageWithParams(theme: .info, title: "Orders", body: jsonErr.localizedDescription)
                             }
                             
                         }else {
-                            showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                            showSwiftMessageWithParams(theme: .error, title: "Orders", body: "Something is not working")
                         }
                     } else {
                         print(response.result.error?.localizedDescription as Any)
@@ -266,51 +270,98 @@ class activeOrderDVC: UIViewController {
     
 }
 extension activeOrderDVC : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         if tableView == orderTableView {
-        return getActiveOrderArray.count
+        return dateAndTimeDataArray.count
         }else {
-            return completeOrderArray.count
+            return dateAndTimeDataArray.count
         }
     }
+//    {
+//        if tableView == orderTableView {
+//        return getActiveOrderArray.count
+//        }else {
+//            return completeOrderArray.count
+//        }
+//    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! activeOrderDCell
-        
-        if tableView == self.orderTableView {
-            cell.dateAndTimeLbl.text = getActiveOrderArray[indexPath.row].orderPlacedDate
-            cell.storeNameLbl.text = getActiveOrderArray[indexPath.row].bussinessName
-            cell.priceLbl.text = "\(getActiveOrderArray[indexPath.row].totalcost!)"
-//        cell.priceLbl.text = priceDataArray[indexPath.row]
-//        cell.storeNameLbl.text = orderTitleNameArray[indexPath.row]
-//        cell.orderNumberLbl.text = orderNumberArray[indexPath.row]
-        cell.cancelBtnTapped.tag = indexPath.row
-       // cell.cancelBtnTapped.addTarget(self, action: #selector(cancelOrderBtnTapped(_sender:)), for: .touchUpInside)
-       // cell.viewDetailTapped.addTarget(self, action: #selector(viewOrderDetailBtnTapped(_sender:)), for: .touchUpInside)
-        cell.viewDetailTapped.RoundSpecificBottomCornerR()
-        cell.cancelBtnTapped.RoundSpecificBottomCornerL()
-        }else {
-            let instance = completeOrderArray[indexPath.row]
-            cell.dateAndTimeLbl.text = instance.orderPlacedDate
-            cell.priceLbl.text = "\(instance.totalcost!)"
-            cell.storeNameLbl.text = instance.bussinessName
-            cell.orderNumberLbl.text = instance.orderID
-           
-           // cell.viewDetailTapped.addTarget(self, action: #selector(viewCompleteOrderTapped(_sender:)), for: .touchUpInside)
-            cell.viewDetailTapped.RoundSpecificBottomCornerLR()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    
+    {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! activeOrderDCell
+            
+            if tableView == self.orderTableView {
+                cell.dateAndTimeLbl.text = dateAndTimeDataArray[indexPath.row]
+                cell.storeNameLbl.text = orderTitleNameArray[indexPath.row]
+                cell.priceLbl.text = priceDataArray[indexPath.row]
+    //        cell.priceLbl.text = priceDataArray[indexPath.row]
+    //        cell.storeNameLbl.text = orderTitleNameArray[indexPath.row]
+    //        cell.orderNumberLbl.text = orderNumberArray[indexPath.row]
+            cell.cancelBtnTapped.tag = indexPath.row
+           // cell.cancelBtnTapped.addTarget(self, action: #selector(cancelOrderBtnTapped(_sender:)), for: .touchUpInside)
+           // cell.viewDetailTapped.addTarget(self, action: #selector(viewOrderDetailBtnTapped(_sender:)), for: .touchUpInside)
+            cell.viewDetailTapped.RoundSpecificBottomCornerR()
+            cell.cancelBtnTapped.RoundSpecificBottomCornerL()
+            }else {
+              //  let instance = completeOrderArray[indexPath.row]
+                cell.dateAndTimeLbl.text = dateAndTimeDataArray[indexPath.row]
+                cell.priceLbl.text = priceDataArray[indexPath.row]
+                cell.storeNameLbl.text = orderTitleNameArray[indexPath.row]
+               // cell.orderNumberLbl.text = instance.orderID
+               
+               // cell.viewDetailTapped.addTarget(self, action: #selector(viewCompleteOrderTapped(_sender:)), for: .touchUpInside)
+                cell.viewDetailTapped.RoundSpecificBottomCornerLR()
+                
+                
+              
+            }
             
             
-          
+            
+            
+            
+            return cell
+            
         }
-        
-        
-        
-        
-        
-        return cell
-        
-    }
+//    {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! activeOrderDCell
+//
+//        if tableView == self.orderTableView {
+//            cell.dateAndTimeLbl.text = getActiveOrderArray[indexPath.row].orderPlacedDate
+//            cell.storeNameLbl.text = getActiveOrderArray[indexPath.row].bussinessName
+//            cell.priceLbl.text = "\(getActiveOrderArray[indexPath.row].totalcost!)"
+////        cell.priceLbl.text = priceDataArray[indexPath.row]
+////        cell.storeNameLbl.text = orderTitleNameArray[indexPath.row]
+////        cell.orderNumberLbl.text = orderNumberArray[indexPath.row]
+//        cell.cancelBtnTapped.tag = indexPath.row
+//       // cell.cancelBtnTapped.addTarget(self, action: #selector(cancelOrderBtnTapped(_sender:)), for: .touchUpInside)
+//       // cell.viewDetailTapped.addTarget(self, action: #selector(viewOrderDetailBtnTapped(_sender:)), for: .touchUpInside)
+//        cell.viewDetailTapped.RoundSpecificBottomCornerR()
+//        cell.cancelBtnTapped.RoundSpecificBottomCornerL()
+//        }else {
+//            let instance = completeOrderArray[indexPath.row]
+//            cell.dateAndTimeLbl.text = instance.orderPlacedDate
+//            cell.priceLbl.text = "\(instance.totalcost!)"
+//            cell.storeNameLbl.text = instance.bussinessName
+//            cell.orderNumberLbl.text = instance.orderID
+//
+//           // cell.viewDetailTapped.addTarget(self, action: #selector(viewCompleteOrderTapped(_sender:)), for: .touchUpInside)
+//            cell.viewDetailTapped.RoundSpecificBottomCornerLR()
+//
+//
+//
+//        }
+//
+//
+//
+//
+//
+//        return cell
+//
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 220

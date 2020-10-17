@@ -25,16 +25,17 @@ class acceptDeliveryDVC: UIViewController {
     
     //accept delivery
     @objc func acceptDeliveryBtnTapped(sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "orderInformationDVC") as! orderInformationDVC
+        let vc = storyboard?.instantiateViewController(identifier: "acceptOrderDVC") as! acceptOrderDVC
+        vc.acceptOrderArray = availableDeliveryArray
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
     func availableDeliverysetup(){
-        //let userID = UserDefaults.standard.array(forKey: SessionManager.Shared.userIdDriver)
+        let userID = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver)
         let body :[String:Any] = [
-            // "userid": userID ,
-            "userid": "5f6783aec74f2",
+            "userid": userID ?? "" ,
+            //"userid": "5f6783aec74f2",
             "lat": "latitude",
             "lang": "longitude",
             "apikey": "shopie_AC4I_BD"

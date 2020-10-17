@@ -66,12 +66,12 @@ class HomeDriverVC: UIViewController {
        
     }
     
-      //accept delivery
-      @objc func acceptDeliveryBtnTapped(sender: UIButton) {
-        let vc = storyboard?.instantiateViewController(identifier: "orderInformationDVC") as! orderInformationDVC
-        self.navigationController?.pushViewController(vc, animated: true)
-        
-       }
+//      //accept delivery
+//      @objc func acceptDeliveryBtnTapped(sender: UIButton) {
+//        let vc = storyboard?.instantiateViewController(identifier: "orderInformationDVC") as! orderInformationDVC
+//        self.navigationController?.pushViewController(vc, animated: true)
+//        
+//       }
    
 
 }

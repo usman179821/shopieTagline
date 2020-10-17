@@ -24,7 +24,6 @@
 		FA07BF032519C9B9009457D1 /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA07BF022519C9B9009457D1 /* UtilityFunctions.swift */; };
 		FA0874E82521E1AE0017430B /* payHistoryDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0874E72521E1AE0017430B /* payHistoryDVC.swift */; };
 		FA0874EA2521E6DB0017430B /* payHistoryDCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0874E92521E6DB0017430B /* payHistoryDCell.swift */; };
-		FA0874EF252203B10017430B /* orderInformationDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0874EE252203B10017430B /* orderInformationDVC.swift */; };
 		FA09B1E32525A5BC00DEFE59 /* activeOrderMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09B1E22525A5BC00DEFE59 /* activeOrderMCell.swift */; };
 		FA09B1E52525AE3200DEFE59 /* activeOrderMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09B1E42525AE3200DEFE59 /* activeOrderMVC.swift */; };
 		FA09B1EA2525CF9D00DEFE59 /* detailOrderMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA09B1E92525CF9D00DEFE59 /* detailOrderMCell.swift */; };
@@ -47,7 +46,6 @@
 		FA0E8324251137320036225B /* hk-grotesk in Resources */ = {isa = PBXBuildFile; fileRef = FA0E8323251137320036225B /* hk-grotesk */; };
 		FA18A429252F2EC0008130AB /* orderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18A428252F2EC0008130AB /* orderModel.swift */; };
 		FA2EC57025225A860024DFD7 /* deliveredOrderDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2EC56F25225A860024DFD7 /* deliveredOrderDVC.swift */; };
-		FA2EC57225225B980024DFD7 /* completeOrderDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2EC57125225B980024DFD7 /* completeOrderDVC.swift */; };
 		FA2EC574252260280024DFD7 /* hoorayDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2EC573252260280024DFD7 /* hoorayDVC.swift */; };
 		FA3469322521C2570043C59F /* bankInfoDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3469312521C2570043C59F /* bankInfoDVC.swift */; };
 		FA3469342521CA590043C59F /* notificationsDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3469332521CA590043C59F /* notificationsDVC.swift */; };
@@ -57,7 +55,6 @@
 		FA57FB052510914A008EAF00 /* SfproText  in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAFB25109148008EAF00 /* SfproText  */; };
 		FA57FB062510914A008EAF00 /* Moki W00 Soft in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAFC25109148008EAF00 /* Moki W00 Soft */; };
 		FA57FB072510914A008EAF00 /* DM_Sans in Resources */ = {isa = PBXBuildFile; fileRef = FA57FAFD25109148008EAF00 /* DM_Sans */; };
-		FA7DC8F2252253EC003C8902 /* startDeliveryDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DC8F1252253EC003C8902 /* startDeliveryDVC.swift */; };
 		FA7DC8F425225412003C8902 /* orderPickupConfirmDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DC8F325225412003C8902 /* orderPickupConfirmDVC.swift */; };
 		FA89A3B9251894F80089AB9B /* SelectedAssetsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA89A3B8251894F80089AB9B /* SelectedAssetsCollectionViewCell.swift */; };
 		FA96AA7B251B19A80017A7C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA96AA7A251B19A70017A7C1 /* GoogleService-Info.plist */; };
@@ -72,7 +69,6 @@
 		FA9CF9DD2517662000C57904 /* HomeDriverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF9DC2517662000C57904 /* HomeDriverVC.swift */; };
 		FA9CF9DF2517669500C57904 /* EarningDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9CF9DE2517669500C57904 /* EarningDVC.swift */; };
 		FA9CF9E2251767E200C57904 /* Marchant.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA9CF9E1251767E200C57904 /* Marchant.storyboard */; };
-		FAAA0FB82522162900D7E8E0 /* mapViewOrderDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAA0FB72522162900D7E8E0 /* mapViewOrderDVC.swift */; };
 		FABEEF01253489820063E554 /* readyOrderMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABEEF00253489820063E554 /* readyOrderMVC.swift */; };
 		FABEEF0325348EA80063E554 /* acceptOrderMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABEEF0225348EA80063E554 /* acceptOrderMVC.swift */; };
 		FAC0707225290040008A654D /* profileMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0707125290040008A654D /* profileMVC.swift */; };
@@ -82,6 +78,7 @@
 		FAE0BF75253A3EEC00D813B7 /* productCatgoryMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0BF74253A3EEC00D813B7 /* productCatgoryMVC.swift */; };
 		FAE0BF77253A426900D813B7 /* productCategoryMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0BF76253A426900D813B7 /* productCategoryMCell.swift */; };
 		FAE1A74C250F40FC00920220 /* earningTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1A74B250F40FC00920220 /* earningTableCells.swift */; };
+		FAE5F338253BA87B001FEBFF /* acceptOrderDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE5F337253BA87A001FEBFF /* acceptOrderDVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +101,6 @@
 		FA07BF022519C9B9009457D1 /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
 		FA0874E72521E1AE0017430B /* payHistoryDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = payHistoryDVC.swift; sourceTree = "<group>"; };
 		FA0874E92521E6DB0017430B /* payHistoryDCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = payHistoryDCell.swift; sourceTree = "<group>"; };
-		FA0874EE252203B10017430B /* orderInformationDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderInformationDVC.swift; sourceTree = "<group>"; };
 		FA09B1E22525A5BC00DEFE59 /* activeOrderMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activeOrderMCell.swift; sourceTree = "<group>"; };
 		FA09B1E42525AE3200DEFE59 /* activeOrderMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activeOrderMVC.swift; sourceTree = "<group>"; };
 		FA09B1E92525CF9D00DEFE59 /* detailOrderMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailOrderMCell.swift; sourceTree = "<group>"; };
@@ -129,7 +125,6 @@
 		FA0E8323251137320036225B /* hk-grotesk */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "hk-grotesk"; sourceTree = "<group>"; };
 		FA18A428252F2EC0008130AB /* orderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderModel.swift; sourceTree = "<group>"; };
 		FA2EC56F25225A860024DFD7 /* deliveredOrderDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deliveredOrderDVC.swift; sourceTree = "<group>"; };
-		FA2EC57125225B980024DFD7 /* completeOrderDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = completeOrderDVC.swift; sourceTree = "<group>"; };
 		FA2EC573252260280024DFD7 /* hoorayDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hoorayDVC.swift; sourceTree = "<group>"; };
 		FA3469312521C2570043C59F /* bankInfoDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bankInfoDVC.swift; sourceTree = "<group>"; };
 		FA3469332521CA590043C59F /* notificationsDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationsDVC.swift; sourceTree = "<group>"; };
@@ -142,7 +137,6 @@
 		FA57FAFD25109148008EAF00 /* DM_Sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = DM_Sans; sourceTree = "<group>"; };
 		FA57FAFE25109149008EAF00 /* FontsFree-Net-SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FontsFree-Net-SFProText-Medium.ttf"; sourceTree = "<group>"; };
 		FA57FAFF25109149008EAF00 /* Moki W00 Uni */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Moki W00 Uni"; sourceTree = "<group>"; };
-		FA7DC8F1252253EC003C8902 /* startDeliveryDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startDeliveryDVC.swift; sourceTree = "<group>"; };
 		FA7DC8F325225412003C8902 /* orderPickupConfirmDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = orderPickupConfirmDVC.swift; sourceTree = "<group>"; };
 		FA89A3B8251894F80089AB9B /* SelectedAssetsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedAssetsCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA96AA7A251B19A70017A7C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -157,7 +151,6 @@
 		FA9CF9DC2517662000C57904 /* HomeDriverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDriverVC.swift; sourceTree = "<group>"; };
 		FA9CF9DE2517669500C57904 /* EarningDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarningDVC.swift; sourceTree = "<group>"; };
 		FA9CF9E1251767E200C57904 /* Marchant.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Marchant.storyboard; sourceTree = "<group>"; };
-		FAAA0FB72522162900D7E8E0 /* mapViewOrderDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapViewOrderDVC.swift; sourceTree = "<group>"; };
 		FABEEF00253489820063E554 /* readyOrderMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = readyOrderMVC.swift; sourceTree = "<group>"; };
 		FABEEF0225348EA80063E554 /* acceptOrderMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = acceptOrderMVC.swift; sourceTree = "<group>"; };
 		FAC0707125290040008A654D /* profileMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileMVC.swift; sourceTree = "<group>"; };
@@ -168,6 +161,7 @@
 		FAE0BF74253A3EEC00D813B7 /* productCatgoryMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCatgoryMVC.swift; sourceTree = "<group>"; };
 		FAE0BF76253A426900D813B7 /* productCategoryMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCategoryMCell.swift; sourceTree = "<group>"; };
 		FAE1A74B250F40FC00920220 /* earningTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = earningTableCells.swift; sourceTree = "<group>"; };
+		FAE5F337253BA87A001FEBFF /* acceptOrderDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = acceptOrderDVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,15 +216,12 @@
 		FA0874EB2521FB390017430B /* ordersViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA0874EE252203B10017430B /* orderInformationDVC.swift */,
 				FA7DC8F325225412003C8902 /* orderPickupConfirmDVC.swift */,
-				FAAA0FB72522162900D7E8E0 /* mapViewOrderDVC.swift */,
-				FA7DC8F1252253EC003C8902 /* startDeliveryDVC.swift */,
 				FA2EC56F25225A860024DFD7 /* deliveredOrderDVC.swift */,
-				FA2EC57125225B980024DFD7 /* completeOrderDVC.swift */,
 				FA2EC573252260280024DFD7 /* hoorayDVC.swift */,
 				FA065E00252B373D00D569F3 /* acceptDeliveryDVC.swift */,
 				FA040B15252F156900FC4C7E /* activeOrderDVC.swift */,
+				FAE5F337253BA87A001FEBFF /* acceptOrderDVC.swift */,
 			);
 			path = ordersViewControllers;
 			sourceTree = "<group>";
@@ -583,7 +574,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA0874EA2521E6DB0017430B /* payHistoryDCell.swift in Sources */,
-				FAAA0FB82522162900D7E8E0 /* mapViewOrderDVC.swift in Sources */,
 				FAE0BF75253A3EEC00D813B7 /* productCatgoryMVC.swift in Sources */,
 				FAC07078252916C2008A654D /* notificationMVC.swift in Sources */,
 				FA040B16252F156900FC4C7E /* activeOrderDVC.swift in Sources */,
@@ -617,7 +607,6 @@
 				FA0BD65D250BF1A7002AD988 /* GlobalString.swift in Sources */,
 				FA07BF032519C9B9009457D1 /* UtilityFunctions.swift in Sources */,
 				FA0D0C77252701E1004FB71F /* orderDetailCompleteMVC.swift in Sources */,
-				FA7DC8F2252253EC003C8902 /* startDeliveryDVC.swift in Sources */,
 				FA3469322521C2570043C59F /* bankInfoDVC.swift in Sources */,
 				FAC0707425290720008A654D /* editProfileMVC.swift in Sources */,
 				FA022FA52517966C00A4037D /* DeliverdMarVC.swift in Sources */,
@@ -630,16 +619,15 @@
 				FA09B1E32525A5BC00DEFE59 /* activeOrderMCell.swift in Sources */,
 				FA07104F251A29540058A8A0 /* Networking.swift in Sources */,
 				FA0BD65A250BF1A7002AD988 /* SessionManager.swift in Sources */,
+				FAE5F338253BA87B001FEBFF /* acceptOrderDVC.swift in Sources */,
 				FA9CF9D12517642600C57904 /* PhoneVerificationDVC.swift in Sources */,
 				FA09B1EA2525CF9D00DEFE59 /* detailOrderMCell.swift in Sources */,
 				FA9CF9D92517659800C57904 /* ProfileDVC.swift in Sources */,
 				FA022F9F2517946E00A4037D /* SignupMarVC.swift in Sources */,
 				FA9CF9DF2517669500C57904 /* EarningDVC.swift in Sources */,
-				FA2EC57225225B980024DFD7 /* completeOrderDVC.swift in Sources */,
 				FA9CF9CD2517634500C57904 /* LoginDVC.swift in Sources */,
 				FA0E8322251124C00036225B /* AvailableGigsCell.swift in Sources */,
 				FA0BD65B250BF1A7002AD988 /* UIExtension.swift in Sources */,
-				FA0874EF252203B10017430B /* orderInformationDVC.swift in Sources */,
 				FA0D0C7B252721E4004FB71F /* getProductMCell.swift in Sources */,
 				FA09B1E52525AE3200DEFE59 /* activeOrderMVC.swift in Sources */,
 				FA0D0C8125272FA4004FB71F /* getProductCollectionViewCell.swift in Sources */,

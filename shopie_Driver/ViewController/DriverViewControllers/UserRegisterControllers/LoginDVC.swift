@@ -219,7 +219,7 @@ extension LoginDVC {
                             
                             if let jsonDic = try JSON (data: data).dictionary {
                                 self.messageLogIn = jsonDic["message"]?.string ?? ""
-                                showSwiftMessageWithParams(theme: .info, title: "Login", body: self.messageLogIn)
+                                showSwiftMessageWithParams(theme: .error, title: "Login Failed", body: "Please try again")
                               
                                 
                                 //guard let data = jsonDic["data"]?.dictionary else {return}
@@ -236,7 +236,7 @@ extension LoginDVC {
                         }
                         
                     }else {
-                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please enter the right credentials")
+                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Something is not working")
                     }
                 } else {
                     print(response.result.error?.localizedDescription as Any)

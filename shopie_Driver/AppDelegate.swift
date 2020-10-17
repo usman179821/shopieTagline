@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         let userIDMerchant = UserDefaults.standard.string(forKey: SessionManager.Shared.userIDMarchant) ?? ""
         print(userIDMerchant)
          let userIDDriver = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver) ?? ""
+        print(userIDDriver, "user ide driver")
 
         if userIDDriver != "" {
             

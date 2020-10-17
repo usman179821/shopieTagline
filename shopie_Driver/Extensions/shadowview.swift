@@ -19,7 +19,15 @@ extension UIView {
         layer.shadowOffset = CGSize(width: 0.1, height: 0.3)
         self.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     }
-    
+    func shadowTop() {
+        
+        self.layer.shadowOpacity = 1
+        self.layer.shadowRadius = 8
+        layer.borderWidth = 1
+        layer.borderColor = #colorLiteral(red: 0.8926324248, green: 0.8926534057, blue: 0.8926420808, alpha: 1)
+        layer.shadowOffset = CGSize(width: 0.1, height: 3.0)
+        
+    }
     func shadowWithLessCornerRadius() {
         self.layer.shadowOpacity = 1
         self.layer.shadowRadius = 1
