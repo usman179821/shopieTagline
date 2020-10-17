@@ -145,7 +145,7 @@ extension PhoneVerifyMarVC {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "Phone Verify", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "Phone Verify", body: "Something is not working")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)
@@ -196,7 +196,7 @@ extension PhoneVerifyMarVC {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "Phone Verify", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "Phone Verify", body: "Something is not working")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)

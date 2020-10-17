@@ -31,3 +31,8 @@ struct getProductMerchantModel {
     public private(set) var ImageID: Int?
 }
 
+struct categoryModel {
+    public private(set) var parentID: String?
+    public private(set) var categoryID: String?
+    public private(set) var name: String?
+}

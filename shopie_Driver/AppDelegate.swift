@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
                GIDSignIn.sharedInstance().delegate = self
         
         
-        
-
+//        
+//
         if  UserDefaults.standard.string(forKey: SessionManager.Shared.isMerchant) == "Merchant" {
 
             setRootViewController(storyBoardId: "Marchant", viewControllerId: "LoginMarVC")
@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
         }
 
         let userIDMerchant = UserDefaults.standard.string(forKey: SessionManager.Shared.userIDMarchant) ?? ""
+        print(userIDMerchant)
          let userIDDriver = UserDefaults.standard.string(forKey: SessionManager.Shared.userIdDriver) ?? ""
 
         if userIDDriver != "" {
@@ -91,8 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate {
                     self.window?.makeKeyAndVisible()
             }
         }
-
-       
+//
+//       
        
         
         

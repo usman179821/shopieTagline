@@ -75,7 +75,7 @@ class readyOrderMVC: UIViewController {
                                     
                                     let SB = UIStoryboard(name: "Marchant", bundle: nil)
                                     if self.message == "Order is ready"{
-                                                let VC = SB.instantiateViewController(withIdentifier: "activeOrderMVC") as! activeOrderMVC
+                                                let VC = SB.instantiateViewController(withIdentifier: "TabBarMarConroller") as! TabBarMarConroller
                                                 
                                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                         appDelegate.window?.rootViewController = VC }

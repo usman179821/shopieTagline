@@ -210,14 +210,14 @@ class activeOrderMVC: UIViewController {
                         }catch let jsonErr{
                             print(jsonErr)
                             
-                            showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+                            showSwiftMessageWithParams(theme: .info, title: "Orders", body: jsonErr.localizedDescription)
                         }
                         
                     }else {
-                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                        showSwiftMessageWithParams(theme: .error, title: "Orders", body: "Something is not working")
                     }
                 } else {
-                    print(response.result.error?.localizedDescription as Any)
+                 //   print(response.result.error?.localizedDescription as Any)
                 }
         }
     }
@@ -309,7 +309,7 @@ class activeOrderMVC: UIViewController {
                         }
                         
                     }else {
-                        showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                        showSwiftMessageWithParams(theme: .error, title: "Orders", body: "Something is not working")
                     }
                 } else {
                     print(response.result.error?.localizedDescription as Any)

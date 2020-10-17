@@ -11,26 +11,22 @@ import Alamofire
 import SwiftyJSON
 
 class getProductMVC: UIViewController {
-
+    
     //MARK:- outlets
     
     @IBOutlet weak var catgoryColVIew: UICollectionView!
     @IBOutlet weak var productTableView: UITableView!
     
-    
     //Variables and properties
     var catgoryArray = ["ELECTRONICS and multy ","FURNITURE","APPAREL","COSMETCS"]
-     
-    
-     lazy var getProductDataArray = [getProductMerchantModel]()
+    lazy var getProductDataArray = [getProductMerchantModel]()
     
     //MARK:- view life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.getProduct()
+        
         // Do any additional setup after loading the view.
     }
-    
     
     @objc func editBtnTapped(_sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "AddProductVC") as! AddProductVC
@@ -40,78 +36,78 @@ class getProductMVC: UIViewController {
         let vc = storyboard?.instantiateViewController(identifier: "AddProductVC") as! AddProductVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getProduct()
+    }
     
-   
-        func getProduct(){
-            let userID = UserDefaults.standard.array(forKey: SessionManager.Shared.userIDMarchant)
-            let body :[String:Any] = [
-               // "userid": userID ,
-                "merchantid": userID ?? "" ,
-                "apikey":"shopie_AC4I_BD",
-            ]
-            print(body)
-            getProductApi(param: body)
-        }
-
-        //MARK:- Api
-        private func getProductApi(param:[String:Any]) {
-            Alamofire.request(getProductMerchantUrl, method: .post, parameters: param, encoding:
-                JSONEncoding.default, headers: nil).responseJSON { (response) in
-                    print(response)
-                    //   print(response.response?.statusCode)
-                    if response.result.error == nil {
-                        if response.response?.statusCode == 200 {
-                            guard let data = response.data else {return}
+    func getProduct(){
+        let userId = UserDefaults.standard.string(forKey: SessionManager.Shared.userIDMarchant)
+        let body :[String:Any] = [
+            // "userid": userID ,
+            "merchantid": userId ?? "",
+            "apikey": "shopie_AC4I_BD"
+        ]
+        // print(body)
+        getProductApi(param: body)
+    }
+    
+    //MARK:- Api
+    private func getProductApi(param:[String:Any]) {
+        Alamofire.request(getProductMerchantUrl, method: .post, parameters: param, encoding:
+            JSONEncoding.default, headers: nil).responseJSON { (response) in
+                // print(response)
+                self.getProductDataArray.removeAll()
+                //   print(response.response?.statusCode)
+                if response.result.error == nil {
+                    if response.response?.statusCode == 200 {
+                        guard let data = response.data else {return}
+                        
+                        do{
                             
-                            do{
+                            if let jsonDic = try JSON (data: data).dictionary {
                                 
-                                if let jsonDic = try JSON (data: data).dictionary {
+                                guard let data = jsonDic["data"]?.array else {return}
+                                for item in data  {
+                                    guard let dataDic = item.dictionary else {return}
                                     
-                                    guard let data = jsonDic["data"]?.array else {return}
-                                    for item in data  {
-                                        guard let dataDic = item.dictionary else {return}
-                                       
-                                        let productname = dataDic["productname"]?.string ?? ""
-                                        let pricep = dataDic["price"]?.int ?? -1
-                                        let stockp = dataDic["stock"]?.int ?? -1
-                                        guard let imagesArray = dataDic["images"]?.array else {return}
-                                        for img in imagesArray {
-                                            guard let imageDic = img.dictionary else {return}
-                                            let imageID = imageDic["imageid"]?.int ?? -1
-                                            let imageUrl = imageDic["url"]?.string ?? ""
-                                            
-                                            
-                                            let obj = getProductMerchantModel.init(productname: productname, price: pricep, stock: stockp, imageUrl: imageUrl,ImageID: imageID)
-                                            self.getProductDataArray.append(obj)
-                                            print(obj)
-                                        }
+                                    let productname = dataDic["productname"]?.string ?? ""
+                                    let pricep = dataDic["price"]?.int ?? -1
+                                    let stockp = dataDic["stock"]?.int ?? -1
+                                    guard let imagesArray = dataDic["images"]?.array else {return}
+                                    for img in imagesArray {
+                                        guard let imageDic = img.dictionary else {return}
+                                        let imageID = imageDic["imageid"]?.int ?? -1
+                                        let imageUrl = imageDic["url"]?.string ?? ""
                                         
                                         
-                                        
-                                   
-                                        
+                                        let obj = getProductMerchantModel.init(productname: productname, price: pricep, stock: stockp, imageUrl: imageUrl,ImageID: imageID)
+                                        self.getProductDataArray.append(obj)
+                                        //    print(obj)
                                     }
                                     
-                                    self.productTableView.reloadData()
                                 }
                                 
-                            }catch let jsonErr{
-                                print(jsonErr)
-                                
-                                showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+                                self.productTableView.reloadData()
                             }
                             
-                        }else {
-                            showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                        }catch let jsonErr{
+                            // print(jsonErr)
+                            
+                            showSwiftMessageWithParams(theme: .info, title: "Get Product", body: jsonErr.localizedDescription)
                         }
-                    } else {
-                        print(response.result.error?.localizedDescription as Any)
+                        
+                    }else {
+                        showSwiftMessageWithParams(theme: .error, title: "Get Product", body: "Something not working")
                     }
-            }
+                } else {
+                    //  print(response.result.error?.localizedDescription as Any)
+                }
         }
+    }
     
     
-
+    
 }
 extension getProductMVC: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,7 +130,7 @@ extension getProductMVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
+        return 100
     }
 }
 
@@ -146,7 +142,7 @@ extension getProductMVC: UICollectionViewDelegate,UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! getProductCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! getProductCollectionViewCell
         
         if indexPath.row == 0 {
             cell.colorLbl.isHidden = false
@@ -156,30 +152,30 @@ extension getProductMVC: UICollectionViewDelegate,UICollectionViewDataSource {
             cell.colorLbl.isHidden = true
         }
         
-      
+        
         
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           let width = view.frame.width // In this example the width is the same as the whole view.
-           let height = CGFloat(50)
-           return CGSize(width: width, height: height)
-       }
+        let width = view.frame.width // In this example the width is the same as the whole view.
+        let height = CGFloat(50)
+        return CGSize(width: width, height: height)
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collection", for: indexPath) as! getProductCollectionViewCell
         cell.productCatgoryLbl.textColor = #colorLiteral(red: 0.9607843137, green: 0.3568627451, blue: 0.1176470588, alpha: 1)
         cell.colorLbl.isHidden = false
-        print("USman")
+        // print("USman")
         
-                       
+        
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let size = CGSize(width: 200, height: 30)
-//                  return size
-//    }
+    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    //        let size = CGSize(width: 200, height: 30)
+    //                  return size
+    //    }
 }
 
 

@@ -69,11 +69,7 @@ class LoginMarVC: UIViewController {
              appleProvider.handleAppleIdRequest(block: { fullName, email, token in
                  // receive data in login class.
                  
-                 
-                 
              })
-        
-         
          }
     
     

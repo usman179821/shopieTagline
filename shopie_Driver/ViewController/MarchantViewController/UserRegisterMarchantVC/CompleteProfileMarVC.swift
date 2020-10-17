@@ -41,18 +41,18 @@ class CompleteProfileMarVC: UIViewController {
     
     @IBAction func continueBtnTapped(_ sender: Any) {
         if businessNameTextField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "Please Enter Business Name ")
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "Please enter business name ")
             
         }
         else if businessAddressTextField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "please Enter Business Address")
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "Please Enter business address")
             
         }else if cityTextField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "please Enter City")
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile", body: "Please Enter City")
             
         }
         else if stateTextField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please Enter State")
+            showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please enter state")
             
         } else if aboutBusinessTextView.text!.isEmpty{
             showSwiftMessageWithParams(theme: .info, title: "Complete Profile ", body: "Please tell about your business")

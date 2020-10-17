@@ -49,7 +49,7 @@ class SignupMarVC: UIViewController {
     }
     
     func navigationSetUp(){
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "need some help?", style: .done, target: self, action: #selector(action(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Need some help?", style: .done, target: self, action: #selector(action(sender:)))
     }
     //Adding functionality top title navigation bar
     @objc func action(sender: UIBarButtonItem) {
@@ -137,22 +137,22 @@ class SignupMarVC: UIViewController {
     
     @IBAction func signupBtnTapped(_ sender: Any) {
         if emailTxtField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter Email ")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please enter email ")
             emailTxtField.becomeFirstResponder()
         }
         else if fullNameTxtField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your full Name")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please enter your full name")
             fullNameTxtField.becomeFirstResponder()
         }else if phoneNumbertxtField.text!.isEmpty {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "please Enter your Phone Number")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Enter your phone number")
             phoneNumbertxtField.becomeFirstResponder()
             
         }
         else if passwordTxtField.text!.isEmpty{
-            showSwiftMessageWithParams(theme: .info, title: "SignUp ", body: "Please Enter your password")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp ", body: "Please enter your password")
             passwordTxtField.becomeFirstResponder()
         }else if  checkBoxClicked == true  {
-            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please Accept Terms & Condition")
+            showSwiftMessageWithParams(theme: .info, title: "SignUp", body: "Please accept terms & condition")
         }
         else {
             let body :[String:Any] = [
@@ -194,6 +194,7 @@ class SignupMarVC: UIViewController {
                             let userIDmerchant = user["userid"]?.string ?? ""
                             
                             UserDefaults.standard.set(userIDmerchant, forKey: SessionManager.Shared.userIDMarchant)
+                            print(userIDmerchant)
                             if self.message == "User with same email already exists" {
                                  let checkStoryBoard = UIStoryboard (name: "Marchant", bundle: nil)
                                 let vc = checkStoryBoard.instantiateViewController(identifier: "CompleteProfileMarVC") as! CompleteProfileMarVC
@@ -213,7 +214,7 @@ class SignupMarVC: UIViewController {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Something is not working")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)
@@ -266,7 +267,7 @@ extension SignupMarVC {
                     }
                     
                 }else {
-                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
+                    showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Something is not working")
                 }
             } else {
                 print(response.result.error?.localizedDescription as Any)

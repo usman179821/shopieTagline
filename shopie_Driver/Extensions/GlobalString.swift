@@ -41,6 +41,7 @@ let acceptOrderMerchantUrl = "https://gotyour6app.online/shopie/order/acceptorde
 let rejectOrderMerchantUrl = "https://gotyour6app.online/shopie/order/rejectorder.php"
 let prepareOrderMerchantUrl = "https://gotyour6app.online/shopie/order/merchantpreparedorder.php"
 let cancelOrderMerchantUrl = "https://gotyour6app.online/shopie/order/cancelorder.php"
+let productCategoryDataUrl = "https://gotyour6app.online/shopie/product/categories.php"
 
 
 

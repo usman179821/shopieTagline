@@ -79,6 +79,8 @@
 		FAC0707425290720008A654D /* editProfileMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0707325290720008A654D /* editProfileMVC.swift */; };
 		FAC07076252913F9008A654D /* bankInfoMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC07075252913F9008A654D /* bankInfoMVC.swift */; };
 		FAC07078252916C2008A654D /* notificationMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC07077252916C2008A654D /* notificationMVC.swift */; };
+		FAE0BF75253A3EEC00D813B7 /* productCatgoryMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0BF74253A3EEC00D813B7 /* productCatgoryMVC.swift */; };
+		FAE0BF77253A426900D813B7 /* productCategoryMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0BF76253A426900D813B7 /* productCategoryMCell.swift */; };
 		FAE1A74C250F40FC00920220 /* earningTableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE1A74B250F40FC00920220 /* earningTableCells.swift */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +165,8 @@
 		FAC07075252913F9008A654D /* bankInfoMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bankInfoMVC.swift; sourceTree = "<group>"; };
 		FAC07077252916C2008A654D /* notificationMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notificationMVC.swift; sourceTree = "<group>"; };
 		FACFCE4F25190ED100D1ABC1 /* shopie_Driver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = shopie_Driver.entitlements; sourceTree = "<group>"; };
+		FAE0BF74253A3EEC00D813B7 /* productCatgoryMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCatgoryMVC.swift; sourceTree = "<group>"; };
+		FAE0BF76253A426900D813B7 /* productCategoryMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = productCategoryMCell.swift; sourceTree = "<group>"; };
 		FAE1A74B250F40FC00920220 /* earningTableCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = earningTableCells.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -345,6 +349,7 @@
 			children = (
 				FA022FA62517971000A4037D /* AddProductVC.swift */,
 				FA0D0C7D252722A6004FB71F /* getProductMVC.swift */,
+				FAE0BF74253A3EEC00D813B7 /* productCatgoryMVC.swift */,
 			);
 			path = ProductsViewControllers;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				FA09B1E92525CF9D00DEFE59 /* detailOrderMCell.swift */,
 				FA0D0C7A252721E4004FB71F /* getProductMCell.swift */,
 				FA040B17252F183A00FC4C7E /* activeOrderDCell.swift */,
+				FAE0BF76253A426900D813B7 /* productCategoryMCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -578,6 +584,7 @@
 			files = (
 				FA0874EA2521E6DB0017430B /* payHistoryDCell.swift in Sources */,
 				FAAA0FB82522162900D7E8E0 /* mapViewOrderDVC.swift in Sources */,
+				FAE0BF75253A3EEC00D813B7 /* productCatgoryMVC.swift in Sources */,
 				FAC07078252916C2008A654D /* notificationMVC.swift in Sources */,
 				FA040B16252F156900FC4C7E /* activeOrderDVC.swift in Sources */,
 				FAC0707225290040008A654D /* profileMVC.swift in Sources */,
@@ -605,6 +612,7 @@
 				FA022FA72517971000A4037D /* AddProductVC.swift in Sources */,
 				FA022FAB251797B900A4037D /* TabBarMarConroller.swift in Sources */,
 				FA022FA92517974300A4037D /* HomeMarVC.swift in Sources */,
+				FAE0BF77253A426900D813B7 /* productCategoryMCell.swift in Sources */,
 				FA18A429252F2EC0008130AB /* orderModel.swift in Sources */,
 				FA0BD65D250BF1A7002AD988 /* GlobalString.swift in Sources */,
 				FA07BF032519C9B9009457D1 /* UtilityFunctions.swift in Sources */,
