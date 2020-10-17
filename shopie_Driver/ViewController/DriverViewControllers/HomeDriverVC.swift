@@ -27,7 +27,7 @@ class HomeDriverVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Offline"
+        self.navigationItem.title = "Dashboared"
 //        jobsCompletedView.shadowWithLessCornerRadius()
         startEarnigView.shadowWithLessCornerRadius()
 //      navigationLeftIcon()
