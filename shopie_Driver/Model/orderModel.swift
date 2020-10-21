@@ -25,8 +25,8 @@ struct orderActiveModel {
 }
 struct getProductMerchantModel {
     public private(set) var productname: String?
-    public private(set) var price: Int?
-    public private(set) var stock: Int?
+    public private(set) var price: String?
+    public private(set) var stock: String?
     public private(set) var imageUrl: String?
     public private(set) var ImageID: Int?
 }

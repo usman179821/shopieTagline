@@ -72,8 +72,8 @@ class getProductMVC: UIViewController {
                                     guard let dataDic = item.dictionary else {return}
                                     
                                     let productname = dataDic["productname"]?.string ?? ""
-                                    let pricep = dataDic["price"]?.int ?? -1
-                                    let stockp = dataDic["stock"]?.int ?? -1
+                                    let pricep = dataDic["price"]?.string ?? ""
+                                    let stockp = dataDic["stock"]?.string ?? ""
                                     guard let imagesArray = dataDic["images"]?.array else {return}
                                     for img in imagesArray {
                                         guard let imageDic = img.dictionary else {return}

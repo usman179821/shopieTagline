@@ -154,11 +154,13 @@ class LoginDVC: UIViewController {
 //                                guard let data = jsonDic["data"]?.dictionary else {return}
 //                                let userID = data["userid"]?.string ?? ""
 //                                UserDefaults.standard.set(userID, forKey: SessionManager.Shared.userIdDriver)
+                                if self.messageLogIn == "user logged in" {
                                 let SB = UIStoryboard(name: "Main", bundle: nil)
                                 let VC = SB.instantiateViewController(withIdentifier: "TabBarViewController") as! TabBarViewController
                                 
                                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                 appDelegate.window?.rootViewController = VC
+                                }
                                 
                             }
                             

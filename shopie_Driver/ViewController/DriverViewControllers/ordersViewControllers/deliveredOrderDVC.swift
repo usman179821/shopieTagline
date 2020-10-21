@@ -91,7 +91,7 @@ class deliveredOrderDVC: UIViewController {
                                 
                                 if let jsonDic = try JSON (data: data).dictionary {
                                     self.message = jsonDic["message"]?.string ?? ""
-                                    showSwiftMessageWithParams(theme: .info, title: "Login", body: self.message)
+                                    showSwiftMessageWithParams(theme: .info, title: "Order Information", body: self.message)
                                     let vc = self.storyboard?.instantiateViewController(identifier: "hoorayDVC") as! hoorayDVC
                                     
                                     self.navigationController?.pushViewController(vc, animated: true)
@@ -103,11 +103,11 @@ class deliveredOrderDVC: UIViewController {
                             }catch let jsonErr{
                                 print(jsonErr)
                                 
-                                showSwiftMessageWithParams(theme: .info, title: "Login", body: jsonErr.localizedDescription)
+                                showSwiftMessageWithParams(theme: .info, title: "Order Information", body: jsonErr.localizedDescription)
                             }
                             
                         }else {
-                            showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
+                            showSwiftMessageWithParams(theme: .error, title: "Order Information", body: "Somthing not working")
                         }
                     } else {
                         print(response.result.error?.localizedDescription as Any)
