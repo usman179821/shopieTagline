@@ -28,7 +28,6 @@ class LoginMarVC: UIViewController {
     //MARK:- Properties and Variables
     var messageLogIn = ""
     var iconClicked = true
-    let appleProvider = AppleSignInClient()
     
     //MARK:- view life cycle
     override func viewDidLoad() {
@@ -65,11 +64,7 @@ class LoginMarVC: UIViewController {
     //MARK:- Actions
     @IBAction func appleBtnTapped(_ sender: Any) {
         
-             
-             appleProvider.handleAppleIdRequest(block: { fullName, email, token in
-                 // receive data in login class.
-                 
-             })
+         
          }
     
     
@@ -130,11 +125,11 @@ class LoginMarVC: UIViewController {
     
     //MARK:- Private Functions
     private func loginApiCall(param:[String:Any]) {
-        Alamofire.request(loginUrl, method: .post, parameters: param, encoding:
+        AF.request(loginUrl, method: .post, parameters: param, encoding:
             JSONEncoding.default, headers: nil).responseJSON { (response) in
                 print(response)
                 //   print(response.response?.statusCode)
-                if response.result.error == nil {
+                
                     if response.response?.statusCode == 200 {
                         guard let data = response.data else {return}
                         
@@ -167,9 +162,7 @@ class LoginMarVC: UIViewController {
                     }else {
                         showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
                     }
-                } else {
-                    print(response.result.error?.localizedDescription as Any)
-                }
+               
         }
     }
 }
@@ -203,11 +196,11 @@ extension LoginMarVC {
     }
     
     private func fbLoginApi(param:[String:Any]) {
-        Alamofire.request(socialLoginUrl, method: .post, parameters: param, encoding:
+        AF.request(socialLoginUrl, method: .post, parameters: param, encoding:
             JSONEncoding.default, headers: nil).responseJSON { (response) in
                 print(response)
                 //   print(response.response?.statusCode)
-                if response.result.error == nil {
+                
                     if response.response?.statusCode == 200 {
                         guard let data = response.data else {return}
                         
@@ -232,9 +225,7 @@ extension LoginMarVC {
                     }else {
                         showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
                     }
-                } else {
-                    print(response.result.error?.localizedDescription as Any)
-                }
+               
         }
     }
 }

@@ -148,14 +148,14 @@ class AddProductVC: UIViewController {
     private func addproductApi(param:[String:Any]) {
         self.spinner.isHidden = false
         self.spinner.startAnimating()
-        Alamofire.request(addProductUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseString{ (response) in
+        AF.request(addProductUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseString{ (response) in
             self.spinner.isHidden = true
             self.spinner.stopAnimating()
             // print(response)
           //  print("Request: \(String(describing: response.request))")   // original url request
            // print("Response: \(String(describing: response.response))") // http url response
             //print("Result: \(response.result)")// response serialization result
-            if response.result.error == nil {
+            
                 if response.response?.statusCode == 200 {
                     guard let data = response.data else {return}
                     
@@ -180,9 +180,7 @@ class AddProductVC: UIViewController {
                 }else {
                     // showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
                 }
-            } else {
-                //    print(response.result.error?.localizedDescription as Any)
-            }
+           
         }
     }
     

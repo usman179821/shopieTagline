@@ -71,11 +71,11 @@ class activeOrderDVC: UIViewController {
 
             //MARK:- Api
             private func completOrder(param:[String:Any]) {
-                Alamofire.request(completeOrCancelOrderDUrl, method: .post, parameters: param, encoding:
+                AF.request(completeOrCancelOrderDUrl, method: .post, parameters: param, encoding:
                     JSONEncoding.default, headers: nil).responseJSON { (response) in
                         print(response)
                         //   print(response.response?.statusCode)
-                        if response.result.error == nil {
+                        
                             if response.response?.statusCode == 200 {
                                 guard let data = response.data else {return}
                                 
@@ -138,19 +138,17 @@ class activeOrderDVC: UIViewController {
                             }else {
                                 showSwiftMessageWithParams(theme: .error, title: "Active Orders", body: "Something is not working")
                             }
-                        } else {
-                            print(response.result.error?.localizedDescription as Any)
-                        }
+                       
                 }
             }
     
         //MARK:- Api
         private func activeOrderAPI(param:[String:Any]) {
-            Alamofire.request(activeOrderDUrl, method: .post, parameters: param, encoding:
+            AF.request(activeOrderDUrl, method: .post, parameters: param, encoding:
                 JSONEncoding.default, headers: nil).responseJSON { (response) in
                     print(response)
                     //   print(response.response?.statusCode)
-                    if response.result.error == nil {
+                    
                         if response.response?.statusCode == 200 {
                             guard let data = response.data else {return}
                             
@@ -220,9 +218,6 @@ class activeOrderDVC: UIViewController {
                         }else {
                             showSwiftMessageWithParams(theme: .error, title: "Orders", body: "Something is not working")
                         }
-                    } else {
-                        print(response.result.error?.localizedDescription as Any)
-                    }
             }
         }
     

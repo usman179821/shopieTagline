@@ -59,11 +59,11 @@ class readyOrderMVC: UIViewController {
     
         //MARK:- Private Functions
         private func readyOrder(param:[String:Any]) {
-            Alamofire.request(prepareOrderMerchantUrl, method: .post, parameters: param, encoding:
+            AF.request(prepareOrderMerchantUrl, method: .post, parameters: param, encoding:
                 JSONEncoding.default, headers: nil).responseJSON { (response) in
                     print(response)
                     //   print(response.response?.statusCode)
-                    if response.result.error == nil {
+                   
                         if response.response?.statusCode == 200 {
                             guard let data = response.data else {return}
                             
@@ -100,9 +100,7 @@ class readyOrderMVC: UIViewController {
                         }else {
                             showSwiftMessageWithParams(theme: .error, title: "Order Information", body: "something not working")
                         }
-                    } else {
-                        print(response.result.error?.localizedDescription as Any)
-                    }
+                   
             }
         }
     

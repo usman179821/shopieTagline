@@ -92,12 +92,11 @@ class TransportationDVC: UIViewController {
     
     //TODO :- API Calling
     private func driverTransportDetaileApi(param:[String:Any]) {
-        Alamofire.request(driverTransportUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        AF.request(driverTransportUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response)
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")// response serialization result
-            if response.result.error == nil {
                 if response.response?.statusCode == 200 {
                     guard let data = response.data else {return}
                     
@@ -127,9 +126,7 @@ class TransportationDVC: UIViewController {
                 }else {
                     showSwiftMessageWithParams(theme: .error, title: "Transport Detail", body: "Please Enter the right credential")
                 }
-            } else {
-                print(response.result.error?.localizedDescription as Any)
-            }
+           
         }
     }
     

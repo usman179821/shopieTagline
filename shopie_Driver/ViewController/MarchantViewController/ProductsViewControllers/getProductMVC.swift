@@ -54,12 +54,12 @@ class getProductMVC: UIViewController {
     
     //MARK:- Api
     private func getProductApi(param:[String:Any]) {
-        Alamofire.request(getProductMerchantUrl, method: .post, parameters: param, encoding:
+        AF.request(getProductMerchantUrl, method: .post, parameters: param, encoding:
             JSONEncoding.default, headers: nil).responseJSON { (response) in
                 // print(response)
                 self.getProductDataArray.removeAll()
                 //   print(response.response?.statusCode)
-                if response.result.error == nil {
+                
                     if response.response?.statusCode == 200 {
                         guard let data = response.data else {return}
                         
@@ -100,9 +100,7 @@ class getProductMVC: UIViewController {
                     }else {
                         showSwiftMessageWithParams(theme: .error, title: "Get Product", body: "Something not working")
                     }
-                } else {
-                    //  print(response.result.error?.localizedDescription as Any)
-                }
+                
         }
     }
     

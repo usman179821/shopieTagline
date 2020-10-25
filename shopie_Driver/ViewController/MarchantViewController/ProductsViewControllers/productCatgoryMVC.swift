@@ -39,11 +39,11 @@ class productCatgoryMVC: UIViewController {
     }
     //MARK:- Api
     private func categoryApi(param:[String:Any]) {
-        Alamofire.request(productCategoryDataUrl, method: .post, parameters: param, encoding:
+        AF.request(productCategoryDataUrl, method: .post, parameters: param, encoding:
             JSONEncoding.default, headers: nil).responseJSON { (response) in
                 //  print(response)
                 //   print(response.response?.statusCode)
-                if response.result.error == nil {
+                
                     if response.response?.statusCode == 200 {
                         guard let data = response.data else {return}
                         
@@ -85,9 +85,7 @@ class productCatgoryMVC: UIViewController {
                     }else {
                         showSwiftMessageWithParams(theme: .error, title: "Product", body: "Something not working")
                     }
-                } else {
-                    //  print(response.result.error?.localizedDescription as Any)
-                }
+               
         }
     }
     private func getSubCatgory (id: String) {

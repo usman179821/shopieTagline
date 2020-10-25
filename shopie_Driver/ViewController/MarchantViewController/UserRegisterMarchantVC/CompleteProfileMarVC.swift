@@ -100,13 +100,13 @@ class CompleteProfileMarVC: UIViewController {
     private func completeProfileApi(param:[String:Any]) {
         self.spinneActivity.isHidden = false
         self.spinneActivity.startAnimating()
-        Alamofire.request(merchantProfile1Url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        AF.request(merchantProfile1Url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
            self.spinneActivity.isHidden = true
            self.spinneActivity.stopAnimating()
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")// response serialization result
-            if response.result.error == nil {
+            
                 if response.response?.statusCode == 200 {
                     guard let data = response.data else {return}
                     
@@ -142,9 +142,7 @@ class CompleteProfileMarVC: UIViewController {
                 }else {
                     showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please Enter the right credential")
                 }
-            } else {
-                print(response.result.error?.localizedDescription as Any)
-            }
+           
         }
     }
     

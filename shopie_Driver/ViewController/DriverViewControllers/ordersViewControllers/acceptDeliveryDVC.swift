@@ -49,11 +49,11 @@ class acceptDeliveryDVC: UIViewController {
     
     //MARK:- Api
     private func AvailableDelivery(param:[String:Any]) {
-        Alamofire.request(availbaleDeleveryDUrl, method: .post, parameters: param, encoding:
+        AF.request(availbaleDeleveryDUrl, method: .post, parameters: param, encoding:
             JSONEncoding.default, headers: nil).responseJSON { (response) in
                 print(response)
                 //   print(response.response?.statusCode)
-                if response.result.error == nil {
+                
                     if response.response?.statusCode == 200 {
                         guard let data = response.data else {return}
                         
@@ -121,9 +121,7 @@ class acceptDeliveryDVC: UIViewController {
                     }else {
                         showSwiftMessageWithParams(theme: .error, title: "Login", body: "Please Enter the right credential")
                     }
-                } else {
-                    print(response.result.error?.localizedDescription as Any)
-                }
+               
         }
     }
     

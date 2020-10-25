@@ -32,7 +32,6 @@ class SignUpDVC: UIViewController {
     var messageSignUp = ""
     var message = ""
     var messageLogIn = ""
-    let appleProvider = AppleSignInClient()
     
     //MARK:- view life Cycle
     override func viewDidLoad() {
@@ -84,13 +83,7 @@ class SignUpDVC: UIViewController {
     }
     @IBAction func appleBtnTapped(_ sender: Any) {
     
-         
-         appleProvider.handleAppleIdRequest(block: { fullName, email, token in
-             // receive data in login class.
-             
-             
-             
-         })
+      
     
      
      }
@@ -214,12 +207,11 @@ class SignUpDVC: UIViewController {
     
     //TODO :- API Calling
     private func signupApiCall(param:[String:Any]) {
-        Alamofire.request(signupUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        AF.request(signupUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response)
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")// response serialization result
-            if response.result.error == nil {
                 if response.response?.statusCode == 200 {
                     guard let data = response.data else {return}
                     
@@ -258,9 +250,7 @@ class SignUpDVC: UIViewController {
                 }else {
                     showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please enter the right credentials")
                 }
-            } else {
-                print(response.result.error?.localizedDescription as Any)
-            }
+            
         }
     }
 }
@@ -283,12 +273,11 @@ extension SignUpDVC {
     }
     //TODO :- API Calling
     private func verificationCode(param:[String:Any]) {
-        Alamofire.request(verifyByNumberUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+        AF.request(verifyByNumberUrl, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
             print(response)
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")// response serialization result
-            if response.result.error == nil {
                 if response.response?.statusCode == 200 {
                     guard let data = response.data else {return}
                     
@@ -314,9 +303,7 @@ extension SignUpDVC {
                 }else {
                     showSwiftMessageWithParams(theme: .error, title: "SignUp", body: "Please enter the right credentials")
                 }
-            } else {
-                print(response.result.error?.localizedDescription as Any)
-            }
+           
         }
     }
 }

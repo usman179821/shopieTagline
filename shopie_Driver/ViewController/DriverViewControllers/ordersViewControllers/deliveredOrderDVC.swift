@@ -79,11 +79,11 @@ class deliveredOrderDVC: UIViewController {
 
         //MARK:- Private Functions
         private func acceptOrder(param:[String:Any]) {
-            Alamofire.request(acceptOrderDUrl, method: .post, parameters: param, encoding:
+            AF.request(acceptOrderDUrl, method: .post, parameters: param, encoding:
                 JSONEncoding.default, headers: nil).responseJSON { (response) in
                     print(response)
                     //   print(response.response?.statusCode)
-                    if response.result.error == nil {
+                   
                         if response.response?.statusCode == 200 {
                             guard let data = response.data else {return}
                             
@@ -109,9 +109,7 @@ class deliveredOrderDVC: UIViewController {
                         }else {
                             showSwiftMessageWithParams(theme: .error, title: "Order Information", body: "Somthing not working")
                         }
-                    } else {
-                        print(response.result.error?.localizedDescription as Any)
-                    }
+                   
             }
         }
 
